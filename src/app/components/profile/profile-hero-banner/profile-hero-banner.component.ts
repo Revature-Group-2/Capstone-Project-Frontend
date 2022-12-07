@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IProfileHeroBanner } from 'src/app/models/Profile';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { IProfileHeroBanner } from 'src/app/models/ProfileHeroBanner';
+import { ImageService } from 'src/app/services/image.service';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 
 @Component({
@@ -8,7 +10,7 @@ import { EditProfileComponent } from '../edit-profile/edit-profile.component';
   templateUrl: './profile-hero-banner.component.html',
   styleUrls: ['./profile-hero-banner.component.css']
 })
-export class ProfileHeroBannerComponent {
+export class ProfileHeroBannerComponent implements OnInit {
 
   @Input()
   isEditable: boolean = false;
@@ -16,10 +18,14 @@ export class ProfileHeroBannerComponent {
   @Input()
   heroBannerInformation: IProfileHeroBanner;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private imageService: ImageService) {}
+
+  ngOnInit(): void {
+    this.dialog.open(EditProfileComponent);
+  }
 
   openDialog() {
     this.dialog.open(EditProfileComponent);
   }
-  
+
 }

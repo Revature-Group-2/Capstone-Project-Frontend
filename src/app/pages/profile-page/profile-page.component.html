@@ -7,16 +7,16 @@
 
         <aside>
             <!-- Personal Information | Container -->
-            <div class="bg-white box-shadow p-4">
+            <div class="bg-white box-shadow p-4"
+                *ngIf="!isProfileToDisplay || isEditable"
+            >
                 <app-profile-personal-information [profilePersonalInfo]="profilePersonalInfo">
                     <button
-                        *ngIf="isEditable; else elseBlock" 
+                        *ngIf="isEditable" 
                         class="w-full mt-2" 
                         mat-raised-button color="primary"
+                        (click)="openDialog()"
                     >Add Information</button>
-                    <ng-template #elseBlock>
-                        The personal information has not been provided
-                    </ng-template>
                 </app-profile-personal-information>
             </div>
 
@@ -71,7 +71,7 @@
         
 
         <div class="col-span-2">
-            <div class="bg-white px-4 py-2 mb-4 box-shadow">
+            <!-- <div class="bg-white px-4 py-2 mb-4 box-shadow">
                 <form class="form">
                     <mat-form-field class="full-width" appearance="fill">
                         <mat-label>Make a Post</mat-label>
@@ -86,7 +86,7 @@
                         <button mat-raised-button color="primary" >Post</button>
                     </div>
                 </form>
-            </div>
+            </div> -->
             
 
             <div *ngFor="let post of posts">

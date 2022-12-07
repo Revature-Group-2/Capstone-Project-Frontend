@@ -15,10 +15,9 @@
                 (change)="'Do something'" 
             />
         </div>    
-
-        <div class="h-64"
-             [style.background-image]="'url(' + heroBannerInformation.backgroundImageUrl + ')'"
-             id="background">
+    
+        <div class="h-64" id="background">
+            <img class="h-64 object-cover w-full " [src]="heroBannerInformation.backgroundImageUrl">
         </div>
 
         <div class="grid grid-flow-col grid-cols-[max-content_1fr]" id="user_photo">
@@ -44,8 +43,9 @@
                 </div>
                 
                 <span class="font-semibold text-sm pb-1 text-gray-700">
-                    {{ heroBannerInformation.currentCity }}  
-                    {{ heroBannerInformation.currentCity && heroBannerInformation.currentCountry ? ', ': '' }}
+                    {{ heroBannerInformation.currentCity }}{{ 
+                        heroBannerInformation.currentCity && heroBannerInformation.currentCountry ? ', ': '' 
+                    }}
                     {{ heroBannerInformation.currentCountry }}
                 </span>
             </div>

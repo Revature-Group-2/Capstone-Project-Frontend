@@ -15,6 +15,16 @@
 
         <li>
             <a class="flex items-center text-sm py-2 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out cursor-pointer" 
+                (click)="clickedButton($event, 'Personal Data')">
+
+                <mat-icon>assignment_ind</mat-icon>
+
+                <span class="ml-2">Personal Data</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="flex items-center text-sm py-2 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out cursor-pointer" 
                 (click)="clickedButton($event, 'Education')"
             >
 

@@ -25,6 +25,9 @@ import { EditProfileSidebarComponent } from './components/profile/edit-profile-s
 import { EditProfileSecuritySettingsComponent } from './components/profile/edit-profile-security-settings/edit-profile-security-settings.component';
 import { ProfileHeroBannerComponent } from './components/profile/profile-hero-banner/profile-hero-banner.component';
 import { FourOFourPageComponent } from './pages/four-o-four-page/four-o-four-page.component';
+import { EditProfileGeneralInfoComponent } from './components/profile/edit-profile-general-info/edit-profile-general-info.component';
+import { OnlyNumbersDirective } from './directives/only-numbers.directive';
+import { EditProfilePersonalDataComponent } from './components/profile/edit-profile-personal-data/edit-profile-personal-data.component';
 
 
 @NgModule({
@@ -45,7 +48,10 @@ import { FourOFourPageComponent } from './pages/four-o-four-page/four-o-four-pag
     EditProfileSidebarComponent,
     EditProfileSecuritySettingsComponent,
     ProfileHeroBannerComponent,
-    FourOFourPageComponent
+    FourOFourPageComponent,
+    EditProfileGeneralInfoComponent,
+    OnlyNumbersDirective,
+    EditProfilePersonalDataComponent
   ],
   imports: [
     BrowserModule,
