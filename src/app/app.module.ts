@@ -28,6 +28,7 @@ import { FourOFourPageComponent } from './pages/four-o-four-page/four-o-four-pag
 import { EditProfileGeneralInfoComponent } from './components/profile/edit-profile-general-info/edit-profile-general-info.component';
 import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 import { EditProfilePersonalDataComponent } from './components/profile/edit-profile-personal-data/edit-profile-personal-data.component';
+import { VoteButtonComponent } from './components/shared/vote-button/vote-button.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { EditProfilePersonalDataComponent } from './components/profile/edit-prof
     FourOFourPageComponent,
     EditProfileGeneralInfoComponent,
     OnlyNumbersDirective,
-    EditProfilePersonalDataComponent
+    EditProfilePersonalDataComponent,
+    VoteButtonComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { IChangePassword, IGeneralInformation, IProfile } from '../models/Profile';
 
 @Injectable({
@@ -26,8 +26,8 @@ export class ProfileService {
     return this.http.post<IChangePassword>(`${this.profileUrl}/change-password`, changePassword, this.headers);
   }
 
-  getGeneralInformation() {
-    return this.http.get(`${this.profileUrl}/general-information`, this.headers);
+  getGeneralInformation(): Observable<IGeneralInformation> {
+    return this.http.get<IGeneralInformation>(`${this.profileUrl}/general-information`, this.headers);
   }
 
   updateGeneralInformation(generalInformation: IGeneralInformation) {

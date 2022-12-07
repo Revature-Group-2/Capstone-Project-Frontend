@@ -6,7 +6,7 @@
     [formGroup]="form"
     (ngSubmit)="submit()"
 >
-    <mat-form-field appearance="fill" class="mt-2"> 
+    <mat-form-field class="mt-2"> 
         <mat-label>Current Password</mat-label>
         <input matInput type="password" formControlName="oldPassword" />
         <mat-error>The current password field is required.</mat-error>
@@ -41,7 +41,7 @@
         {{ message }}
     </p>
 
-    <div class="flex">
+    <div class="flex justify-center">
         <button 
             mat-raised-button 
             color="primary" 

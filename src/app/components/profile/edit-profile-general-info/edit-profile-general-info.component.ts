@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IGeneralInformation } from 'src/app/models/Profile';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -8,9 +8,24 @@ import { ProfileService } from 'src/app/services/profile.service';
   templateUrl: './edit-profile-general-info.component.html',
   styleUrls: ['./edit-profile-general-info.component.css']
 })
-export class EditProfileGeneralInfoComponent implements OnDestroy {
+export class EditProfileGeneralInfoComponent implements OnInit, OnDestroy {
+
+  hasResponse: boolean = false;
+  hasError: boolean = false;
+  responseMessage: string = "";
 
   constructor(private profileService: ProfileService) {}
+  
+  ngOnInit(): void {
+    this.profileService.getGeneralInformation().subscribe( (response: IGeneralInformation) => {
+      this.form.controls.firstName.setValue(response.firstName);
+      this.form.controls.lastName.setValue(response.lastName);
+      this.form.controls.gender.setValue(response.gender);
+      this.form.controls.dob.setValue(response.dob);
+      this.form.controls.email.setValue(response.email);
+      this.form.controls.phoneNumber.setValue(response.phoneNumber);
+    })
+  }
 
   form = new FormGroup({
     firstName: new FormControl<string>('', Validators.required),
@@ -25,6 +40,9 @@ export class EditProfileGeneralInfoComponent implements OnDestroy {
   });
 
   submit() {
+    this.hasResponse = false;
+    this.responseMessage = "";
+
     if (this.form.valid) {
       const generalInformation: IGeneralInformation = {
         firstName: this.form.value.firstName ? this.form.value.firstName : '',
@@ -36,11 +54,14 @@ export class EditProfileGeneralInfoComponent implements OnDestroy {
       }
 
       this.profileService.updateGeneralInformation(generalInformation).subscribe({
-        next: (response) => {
-          console.log(response)
+        next: (response: any) => {
+          this.hasResponse = true;
+          this.responseMessage = response.message;
         },
         error: (errorResponse) => {
-          console.log(errorResponse)
+          this.hasResponse = true;
+          this.hasError = true;
+          this.responseMessage = errorResponse.error;
         }
       })
     }

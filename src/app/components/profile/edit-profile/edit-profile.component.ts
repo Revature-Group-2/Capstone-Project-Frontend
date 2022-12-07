@@ -15,7 +15,8 @@ interface IComponentToShow {
 export class EditProfileComponent {
 
   @Input()
-  showComponent = new BehaviorSubject<string>('general information');
+  showComponent = new BehaviorSubject<string>('personal data');
+  //showComponent = new BehaviorSubject<string>('general information');
 
   constructor(public dialogRef: MatDialogRef<EditProfileComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IComponentToShow) {
