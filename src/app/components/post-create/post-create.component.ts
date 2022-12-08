@@ -48,6 +48,10 @@ export class PostCreateComponent {
           if (error.error === "profanity") {
             this.profanity = true;
           }
+        },
+        complete: () => {
+          this.postForm.controls.imageUrl.setValue('')
+          this.postForm.controls.text.setValue('')
         }
     })
   }
