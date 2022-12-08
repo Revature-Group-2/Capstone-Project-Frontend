@@ -1,6 +1,9 @@
 <mat-card class="user-card">
 
-    <div class="user-circle"></div>
+    <img class="relative bg-white rounded-full border-white mb-2" 
+        id="avatar" 
+        [src]="user.avatarImageUrl" alt="user's photo"
+    />
     <mat-divider></mat-divider>
 
     <p style="padding-top: 1em; font-weight: bold;">

@@ -1,7 +1,11 @@
 <app-navbar></app-navbar>
 <div class="mx-5 lg:mx-7 xl:mx-20">
 
-    <app-profile-hero-banner [isEditable]="isEditable" [heroBannerInformation]="profileHeroBanner"></app-profile-hero-banner>
+    <app-profile-hero-banner 
+        [isEditable]="isEditable" 
+        [heroBannerInformation]="profileHeroBanner"
+        [updateProfile]="updateProfile"
+    ></app-profile-hero-banner>
 
     <div class="mt-4 grid grid-cols-[270px_1fr_1fr] lg:grid-cols-[360px_1fr_1fr] xl:grid-cols-4 gap-4">
 
@@ -21,7 +25,11 @@
             </div>
 
             <!-- List of Friends-->
-            <div class="mt-4 py-4 bg-white box-shadow">
+            <div class="py-4 bg-white box-shadow"
+                [ngClass]="{
+                    'mt-4' : !isProfileToDisplay || isEditable
+                }"
+            >
                 <h4 class="px-4 flex items-center justify-between">
                     <span class="flex items-center">
                         <mat-icon>group</mat-icon>
@@ -71,22 +79,11 @@
         
 
         <div class="col-span-2">
-            <!-- <div class="bg-white px-4 py-2 mb-4 box-shadow">
-                <form class="form">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Make a Post</mat-label>
-                        <textarea matInput autofocus formControlName="text"></textarea>
-                    </mat-form-field>
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Add an Image?</mat-label>
-                        <input matInput formControlName="imageUrl">
-                    </mat-form-field>
-                    <div align="end">
-                        <button mat-raised-button color="warn" >Cancel</button>
-                        <button mat-raised-button color="primary" >Post</button>
-                    </div>
-                </form>
-            </div> -->
+            <div class="bg-white px-4 py-2 mb-4 box-shadow"
+                *ngIf="isEditable"
+            >
+              <app-post-create [inputPosts]="posts" (outputPosts)="updatePosts($event)"></app-post-create>
+            </div>
             
 
             <div *ngFor="let post of posts">

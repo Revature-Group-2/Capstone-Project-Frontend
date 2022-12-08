@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IGeneralInformation } from 'src/app/models/Profile';
+import { IGeneralInformation, IProfile } from 'src/app/models/Profile';
 import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
@@ -9,6 +9,9 @@ import { ProfileService } from 'src/app/services/profile.service';
   styleUrls: ['./edit-profile-general-info.component.css']
 })
 export class EditProfileGeneralInfoComponent implements OnInit, OnDestroy {
+
+  @Output()
+  outputProfile: EventEmitter<IProfile> = new EventEmitter();
 
   hasResponse: boolean = false;
   hasError: boolean = false;
@@ -57,7 +60,9 @@ export class EditProfileGeneralInfoComponent implements OnInit, OnDestroy {
         next: (response: any) => {
           this.hasResponse = true;
           this.responseMessage = response.message;
+          this.outputProfile.emit(response.entity);
         },
+
         error: (errorResponse) => {
           this.hasResponse = true;
           this.hasError = true;

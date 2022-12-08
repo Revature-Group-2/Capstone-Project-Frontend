@@ -1,5 +1,5 @@
 import { Target } from '@angular/compiler';
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -23,6 +23,8 @@ export class ProfilePageComponent implements OnDestroy {
 
   routerEventSubscription: Subscription;
   activatedRouteSubscription: Subscription;
+  alienProfileSubscription: Subscription;
+  ownProfileSubscription: Subscription;
 
   isEditable = true;
 
@@ -32,10 +34,14 @@ export class ProfilePageComponent implements OnDestroy {
   profileHeroBanner: ProfileHeroBanner = new ProfileHeroBanner();
   profilePersonalInfo: ProfilePersonalInfo = new ProfilePersonalInfo();
   isProfileToDisplay: boolean;
+  
 
   constructor(private authService: AuthService, private postService: PostService, public router: Router, private profileService: ProfileService,
-              private activatedRoute: ActivatedRoute, public dialog: MatDialog) 
+              private activatedRoute: ActivatedRoute, public dialog: MatDialog, public ref: ChangeDetectorRef ) 
   {
+    /* Bind context for the method update profile */
+    this.updateProfile = this.updateProfile.bind(this);
+
     /* A hook detects event of changing route inside of a profile */
     this.routerEventSubscription = router.events
       .pipe( filter(event => event instanceof NavigationEnd))
@@ -45,23 +51,24 @@ export class ProfilePageComponent implements OnDestroy {
 
       /* Defined query parameters if provided and makes appropriate request to Profile API */
       this.activatedRouteSubscription = this.activatedRoute.queryParams
-        .pipe( filter( params =>  params['id']) )
-        .subscribe( params => {
-          this.isEditable = false;
+      .pipe( filter( params =>  params['id']) )
+      .subscribe( params => {
+        this.isEditable = false;
 
-          this.profileService.getProfile(params['id']).subscribe({
-            next: (profile : IProfile) => {
-              this.manageProfileHeroBanner(profile);
-              this.manageProfilePersonalInfo(profile);
-            },
-            error: () => { this.router.navigate(['/404']); }
-          }) 
-        }
-      );
+        this.alienProfileSubscription = this.profileService.getProfile(params['id']).subscribe({
+          next: (profile : IProfile) => {
+            this.manageProfileHeroBanner(profile);
+            this.manageProfilePersonalInfo(profile);
+            
+            this.postService.userPosts(profile.owner.id).subscribe( posts => { this.posts = posts.reverse() })
+          },
+          error: () => { this.router.navigate(['/404']); }
+        }) 
+      });
 
       /* Allows edit profile accessed on /profile route */
       if (this.isEditable) {
-        this.profileService.getOwnProfile().subscribe( (profile: IProfile) => {
+        this.ownProfileSubscription = this.profileService.getOwnProfile().subscribe( (profile: IProfile) => {
           this.isEditable = true;
           this.manageProfileHeroBanner(profile);
           this.manageProfilePersonalInfo(profile);
@@ -71,7 +78,7 @@ export class ProfilePageComponent implements OnDestroy {
         this.authService.restoreSession().subscribe( user => {
           this.user = user;
     
-          this.postService.userPosts(this.user.id).subscribe( posts => { this.posts = posts })
+          this.postService.userPosts(this.user.id).subscribe( posts => { this.posts = posts.reverse() })
         })
       }
     });
@@ -87,13 +94,21 @@ export class ProfilePageComponent implements OnDestroy {
       this.isProfileToDisplay = ProfilePersonalInfo.hasSomethingToDisplay({...profile})
   }
 
+  updateProfile (profile : IProfile) {
+    this.manageProfileHeroBanner(profile);
+    this.manageProfilePersonalInfo(profile)
+  }
+
+  updatePosts(posts: Post[]) {
+    this.posts = posts.reverse();
+  }
+
   openDialog() {
     this.dialog.open(EditProfileComponent, {
-      data: { componentToDisplay: "personal data"}
+      data: { componentToDisplay: "general information", updateProfile: this.updateProfile }
     });
   }
 
-  /* Prevents some bugs related to routing */
   ngOnDestroy(): void {
     this.routerEventSubscription.unsubscribe();
     this.activatedRouteSubscription.unsubscribe();

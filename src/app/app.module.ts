@@ -27,8 +27,12 @@ import { ProfileHeroBannerComponent } from './components/profile/profile-hero-ba
 import { FourOFourPageComponent } from './pages/four-o-four-page/four-o-four-page.component';
 import { EditProfileGeneralInfoComponent } from './components/profile/edit-profile-general-info/edit-profile-general-info.component';
 import { OnlyNumbersDirective } from './directives/only-numbers.directive';
-import { EditProfilePersonalDataComponent } from './components/profile/edit-profile-personal-data/edit-profile-personal-data.component';
 import { VoteButtonComponent } from './components/shared/vote-button/vote-button.component';
+import { EditProfileLocationComponent } from './components/profile/edit-profile-location/edit-profile-location.component';
+import { EditProfileEducationComponent } from './components/profile/edit-profile-education/edit-profile-education.component';
+import { EditProfileWorkComponent } from './components/profile/edit-profile-work/edit-profile-work.component';
+import { EditProfileMaritalStatusComponent } from './components/profile/edit-profile-marital-status/edit-profile-marital-status.component';
+import { PostCreateComponent } from './components/post-create/post-create.component';
 
 
 @NgModule({
@@ -52,8 +56,12 @@ import { VoteButtonComponent } from './components/shared/vote-button/vote-button
     FourOFourPageComponent,
     EditProfileGeneralInfoComponent,
     OnlyNumbersDirective,
-    EditProfilePersonalDataComponent,
-    VoteButtonComponent
+    VoteButtonComponent,
+    EditProfileLocationComponent,
+    EditProfileEducationComponent,
+    EditProfileWorkComponent,
+    EditProfileMaritalStatusComponent,
+    PostCreateComponent
   ],
   imports: [
     BrowserModule,

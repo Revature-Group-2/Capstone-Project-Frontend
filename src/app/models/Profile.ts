@@ -12,6 +12,27 @@ export interface IGeneralInformation {
     phoneNumber: string
 }
 
+export interface IProfileLocation {
+    currentCity: string
+    currentCountry: string
+    bornCity: string
+    bornCountry: string
+}
+
+export interface IProfileEducation {
+    schoolName: string
+}
+
+export interface IProfileWork {
+    jobTitle: string
+    companyName: string
+    companyUrl: string
+}
+
+export interface IProfileMaritalStatus {
+    maritalStatus: string
+}
+
 export interface IUser {
     id: number
     email: string
@@ -32,7 +53,7 @@ export interface IProfile {
 
     dob: string
     gender: string
-    martialStatus: string
+    maritalStatus: string
     schoolName: string
 
     jobTitle: string

@@ -4,23 +4,43 @@
     <div class="px-4 py-4 bg-white box-shadow min-w-0" id="overflow-fix"
         [ngSwitch]="showComponent | async"
     >
+        <span *ngSwitchCase="'general information'">
+            <h2>General Information</h2>
+            <mat-divider></mat-divider>
+            <app-edit-profile-general-info (outputProfile)="emitProfile($event)"></app-edit-profile-general-info>
+        </span>
+
+        <span *ngSwitchCase="'location'">
+            <h2>Location</h2>
+            <mat-divider></mat-divider>
+            <app-edit-profile-location (outputProfile)="emitProfile($event)"></app-edit-profile-location>
+        </span>
+
+        <span *ngSwitchCase="'education'">
+            <h2>Education</h2>
+            <mat-divider></mat-divider>
+            <app-edit-profile-education (outputProfile)="emitProfile($event)"></app-edit-profile-education>
+        </span>
+
+        <span *ngSwitchCase="'work'">
+            <h2>Work</h2>
+            <mat-divider></mat-divider>
+            <app-edit-profile-work (outputProfile)="emitProfile($event)"></app-edit-profile-work>
+        </span>
+
+        <span *ngSwitchCase="'marital status'">
+            <h2>Marital Status</h2>
+            <mat-divider></mat-divider>
+            <app-edit-profile-marital-status (outputProfile)="emitProfile($event)"></app-edit-profile-marital-status>
+        </span>
+
         <span *ngSwitchCase="'security settings'">
             <h2>Security Settings</h2>
             <mat-divider></mat-divider>
             <app-edit-profile-security-settings></app-edit-profile-security-settings>
-        </span>
-       
-        <span *ngSwitchCase="'general information'">
-            <h2>General Information</h2>
-            <mat-divider></mat-divider>
-            <app-edit-profile-general-info></app-edit-profile-general-info>
-        </span>
+        </span>   
 
-        <span *ngSwitchCase="'personal data'">
-            <h2>Personal Data</h2>
-            <mat-divider></mat-divider>
-            <app-edit-profile-personal-data></app-edit-profile-personal-data>
-        </span>
+        
        
     </div>
 </div>

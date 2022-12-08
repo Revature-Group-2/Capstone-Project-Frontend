@@ -1,7 +1,7 @@
 export interface IProfilePersonalInfo {
     bornCity: string,
     bornCountry: string,
-    martialStatus: string,
+    maritalStatus: string,
     jobTitle: string,
     companyName: string,
     companyUrl: string,
@@ -12,7 +12,7 @@ export class ProfilePersonalInfo implements IProfilePersonalInfo {
 
     bornCity: string
     bornCountry: string
-    martialStatus: string
+    maritalStatus: string
     jobTitle: string
     companyName: string
     companyUrl: string
@@ -21,7 +21,7 @@ export class ProfilePersonalInfo implements IProfilePersonalInfo {
     constructor(personInfo?: IProfilePersonalInfo) {
         this.bornCity = personInfo?.bornCity ?? ''
         this.bornCountry = personInfo?.bornCountry ?? ''
-        this.martialStatus = personInfo?.martialStatus ?? ''
+        this.maritalStatus = personInfo?.maritalStatus ?? ''
         this.jobTitle = personInfo?.jobTitle ?? ''
         this.companyName = personInfo?.companyName ?? ''
         this.companyUrl = personInfo?.companyUrl ?? ''
@@ -29,7 +29,7 @@ export class ProfilePersonalInfo implements IProfilePersonalInfo {
     }
 
     static hasSomethingToDisplay(personInfo: IProfilePersonalInfo): boolean {
-        const reducedValue = (personInfo.schoolName || personInfo.jobTitle || personInfo.bornCity || personInfo.bornCountry || personInfo.martialStatus)
+        const reducedValue = (personInfo.schoolName || personInfo.jobTitle || personInfo.bornCity || personInfo.bornCountry || personInfo.maritalStatus)
         return reducedValue == '' || reducedValue == null
     }
 }
