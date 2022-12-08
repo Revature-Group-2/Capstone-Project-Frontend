@@ -33,6 +33,7 @@ import { EditProfileEducationComponent } from './components/profile/edit-profile
 import { EditProfileWorkComponent } from './components/profile/edit-profile-work/edit-profile-work.component';
 import { EditProfileMaritalStatusComponent } from './components/profile/edit-profile-marital-status/edit-profile-marital-status.component';
 import { PostCreateComponent } from './components/post-create/post-create.component';
+import { PostDeleteButtonComponent } from './components/shared/post-delete-button/post-delete-button.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { PostCreateComponent } from './components/post-create/post-create.compon
     EditProfileEducationComponent,
     EditProfileWorkComponent,
     EditProfileMaritalStatusComponent,
-    PostCreateComponent
+    PostCreateComponent,
+    PostDeleteButtonComponent
   ],
   imports: [
     BrowserModule,

@@ -28,7 +28,12 @@ export class ProfilePageComponent implements OnDestroy {
 
   isEditable = true;
 
+  inputPosts!: Post[];
   posts!: Post[];
+  updatePosts(posts: Post[]) {
+    this.posts = posts;
+  }
+
   user!: User;
 
   profileHeroBanner: ProfileHeroBanner = new ProfileHeroBanner();
@@ -60,7 +65,9 @@ export class ProfilePageComponent implements OnDestroy {
             this.manageProfileHeroBanner(profile);
             this.manageProfilePersonalInfo(profile);
             
-            this.postService.userPosts(profile.owner.id).subscribe( posts => { this.posts = posts.reverse() })
+            this.postService.userPosts(profile.owner.id).subscribe( posts => { 
+              this.posts = posts.reverse() 
+            })
           },
           error: () => { this.router.navigate(['/404']); }
         }) 
@@ -78,7 +85,10 @@ export class ProfilePageComponent implements OnDestroy {
         this.authService.restoreSession().subscribe( user => {
           this.user = user;
     
-          this.postService.userPosts(this.user.id).subscribe( posts => { this.posts = posts.reverse() })
+          this.postService.userPosts(this.user.id).subscribe( posts => { 
+            this.posts = posts
+            this.inputPosts = posts.reverse();
+          })
         })
       }
     });
@@ -99,9 +109,7 @@ export class ProfilePageComponent implements OnDestroy {
     this.manageProfilePersonalInfo(profile)
   }
 
-  updatePosts(posts: Post[]) {
-    this.posts = posts.reverse();
-  }
+  
 
   openDialog() {
     this.dialog.open(EditProfileComponent, {
