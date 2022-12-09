@@ -19,6 +19,16 @@
                 >
                     <mat-icon [color]="router.url === '/profile' ? 'primary' : ''">account_circle</mat-icon>
                 </a>
+
+                <a 
+                    routerLink="/search"
+                    [ngClass]="{
+                        'active-icon relative' : router.url === '/search'
+                    }" 
+                    class="flex items-center ml-10"
+                >
+                    <mat-icon [color]="router.url === '/search' ? 'primary' : ''">search</mat-icon>
+                </a>
             </div>
             <button mat-button (click)="logout();">Logout</button>
         </div>

@@ -68,6 +68,11 @@ export class ProfileService {
   }
 
   updateProfileMaritalStatus(profileMaritalStatus: IProfileMaritalStatus): Observable<IProfile> {
-    return this.http.post<IProfile>(`${this.profileUrl}/profile-marital-status`, profileMaritalStatus, this.headers)
+    return this.http.post<IProfile>(`${this.profileUrl}/profile-marital-status`, profileMaritalStatus, this.headers);
   }
+
+  updateProfileBackground(url: string): Observable<IProfile> {
+    return this.http.post<IProfile>(`${this.profileUrl}/profile-background`, {url}, this.headers);
+  } 
+
 }

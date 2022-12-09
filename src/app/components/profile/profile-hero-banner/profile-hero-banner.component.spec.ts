@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { IProfileHeroBanner } from 'src/app/models/ProfileHeroBanner';
 import { ImageService } from 'src/app/services/image.service';
+import { ProfileService } from 'src/app/services/profile.service';
 
 
 import { ProfileHeroBannerComponent } from './profile-hero-banner.component';
@@ -9,6 +10,7 @@ import { ProfileHeroBannerComponent } from './profile-hero-banner.component';
 describe('ProfileHeroBannerComponent', () => {
   let component: ProfileHeroBannerComponent;
   let fixture: ComponentFixture<ProfileHeroBannerComponent>;
+  let authServiceStub: Partial<ProfileService>;
   let dialogStub: Partial<MatDialog>;
   let imageStub: Partial<ImageService>;
   let expectedHBI: IProfileHeroBanner =  {
@@ -33,7 +35,8 @@ describe('ProfileHeroBannerComponent', () => {
       declarations: [ ProfileHeroBannerComponent ],
       providers: [
         {provide: MatDialog, useValue: dialogStub}, 
-        {provide: ImageService, useValue: imageStub}
+        {provide: ImageService, useValue: imageStub},
+        {provide: ProfileService, useValue: authServiceStub}
       ]
     })
     .compileComponents();

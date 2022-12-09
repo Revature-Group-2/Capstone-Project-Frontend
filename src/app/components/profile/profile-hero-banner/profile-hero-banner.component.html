@@ -12,7 +12,7 @@
                 type="file" 
                 id="file" 
                 accept="image/jpg, image/jpeg, image/png"
-                (change)="'Do something'" 
+                (change)="onImageChange($event, 'background')" 
             />
         </div>    
     
@@ -21,10 +21,30 @@
         </div>
 
         <div class="grid grid-flow-col grid-cols-[max-content_1fr]" id="user_photo">
-            <img class="relative bg-white w-[120px] h-[120px] border-[5px] rounded-full border-white ml-5 mr-3 mt-3" 
+            <span class="relative">
+                <img class="relative bg-white w-[120px] h-[120px] border-[5px] rounded-full border-white ml-5 mr-3 mt-3" 
                  id="avatar" 
                  [src]="heroBannerInformation.avatarImageUrl" alt="user's photo"
-            />
+                />
+
+                <div 
+                    *ngIf="isEditable"
+                    class="invisible absolute top-[11px] left-[19px] rounded-full w-[122px] h-[122px] bg-slate-800/70 justify-center items-center hover:flex"
+                >
+
+                    <label for="file" class="text-white/40 text-shadow hover:text-white/90 transition-colors cursor-pointer">
+                        <mat-icon class="scale-125">photo_camera</mat-icon>
+                    </label>
+                    <input 
+                        type="file" 
+                        id="file" 
+                        accept="image/jpg, image/jpeg, image/png"
+                        (change)="onImageChange($event, 'avatar')" 
+                    />
+                </div> 
+
+            </span>
+            
             
             <div class="grid items-end">
                 <div class="flex items-center justify-between w-full">

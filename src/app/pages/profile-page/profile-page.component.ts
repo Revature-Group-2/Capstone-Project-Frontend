@@ -42,7 +42,7 @@ export class ProfilePageComponent implements OnDestroy {
   
 
   constructor(private authService: AuthService, private postService: PostService, public router: Router, private profileService: ProfileService,
-              private activatedRoute: ActivatedRoute, public dialog: MatDialog, public ref: ChangeDetectorRef ) 
+              private activatedRoute: ActivatedRoute, public dialog: MatDialog ) 
   {
     /* Bind context for the method update profile */
     this.updateProfile = this.updateProfile.bind(this);
@@ -86,7 +86,9 @@ export class ProfilePageComponent implements OnDestroy {
           this.user = user;
     
           this.postService.userPosts(this.user.id).subscribe( posts => { 
+
             this.posts = posts
+
             this.inputPosts = posts.reverse();
           })
         })

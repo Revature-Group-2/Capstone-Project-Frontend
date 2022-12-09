@@ -12,8 +12,6 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class PostCreateComponent {
 
-  unsubscribePost: Subscription;
-
   postForm = new FormGroup({
     text: new FormControl(''),
     imageUrl: new FormControl('')
@@ -37,7 +35,7 @@ export class PostCreateComponent {
 
   submitPost = (e: any) => {
     e.preventDefault();
-    this.unsubscribePost = this.postService.upsertPost(new Post(0, this.postForm.value.text || "", this.postForm.value.imageUrl || "", 0, this.authService.currentUser, []))
+    this.postService.upsertPost(new Post(0, this.postForm.value.text || "", this.postForm.value.imageUrl || "", 0, this.authService.currentUser, []))
       .subscribe({
         next: (response) => {
           this.inputPosts = [response, ...this.inputPosts]

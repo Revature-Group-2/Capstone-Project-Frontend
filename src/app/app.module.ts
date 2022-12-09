@@ -34,6 +34,8 @@ import { EditProfileWorkComponent } from './components/profile/edit-profile-work
 import { EditProfileMaritalStatusComponent } from './components/profile/edit-profile-marital-status/edit-profile-marital-status.component';
 import { PostCreateComponent } from './components/post-create/post-create.component';
 import { PostDeleteButtonComponent } from './components/shared/post-delete-button/post-delete-button.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { SearchUserCardComponent } from './components/search-user-card/search-user-card.component';
 
 
 @NgModule({
@@ -63,7 +65,9 @@ import { PostDeleteButtonComponent } from './components/shared/post-delete-butto
     EditProfileWorkComponent,
     EditProfileMaritalStatusComponent,
     PostCreateComponent,
-    PostDeleteButtonComponent
+    PostDeleteButtonComponent,
+    SearchPageComponent,
+    SearchUserCardComponent
   ],
   imports: [
     BrowserModule,
