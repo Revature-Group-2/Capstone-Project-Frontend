@@ -1,0 +1,58 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="max-w-2xl m-auto pb-3">
+    <h3 class="pt-3 mb-1">Current Location</h3>
+
+    <p class="col-span-2">
+        Change the current location, so everyone would know where you are and where you are from.
+    </p>
+
+    <span class="px-4 pt-2 grid grid-cols-2 gap-x-3 gap-y-1 max-w-2xl">
+        <mat-form-field>
+            <mat-label>Current Country</mat-label>
+            <input matInput type="text" name="currentCountry" formControlName="currentCountry" >
+            <mat-error>A first name field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Current City</mat-label>
+            <input matInput type="text" name="currentCity" formControlName="currentCity" >
+            <mat-error>A first name field is required.</mat-error>
+        </mat-form-field>
+    </span>
+
+    <mat-divider></mat-divider>
+
+    <span class="px-4 pt-2 grid grid-cols-2 gap-x-3 gap-y-1 max-w-2xl">
+        <mat-form-field>
+            <mat-label>Homeland Country</mat-label>
+            <input matInput type="text" name="bornCountry" formControlName="bornCountry" >
+            <mat-error>A first name field is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Homeland City</mat-label>
+            <input matInput type="text" name="bornCity" formControlName="bornCity" >
+            <mat-error>A first name field is required.</mat-error>
+        </mat-form-field>
+    </span>
+
+    <span 
+        class="flex justify-center font-semibold mb-2"
+        *ngIf="hasResponse"
+        [ngClass]="{
+            'text-red-500' : hasError,
+            'text-blue-500': !hasError
+        }"
+    >
+        {{ responseMessage }}
+    </span>
+
+    <div class="flex justify-center">
+        <button 
+            mat-raised-button 
+            color="primary" 
+            class="mt-2 btn-block tracking-wider w-1/2 flex m-auto" 
+            type="submit"
+        >Update</button>
+    </div>
+
+</form>
