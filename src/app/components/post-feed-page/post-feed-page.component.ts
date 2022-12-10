@@ -39,16 +39,21 @@ export class PostFeedPageComponent implements OnInit {
   submitPost = (e: any) => {
     e.preventDefault();
     this.postService.upsertPost(new Post(0, this.postForm.value.text || "", this.postForm.value.imageUrl || "", 0, this.authService.currentUser, []))
-      .subscribe(
-        (response) => {
+      .subscribe({
+        next: (response) => {
           this.posts = [response, ...this.posts]
           this.toggleCreatePost()
-        }, error => {
+        }, 
+        error: error => {
           if (error.error === "profanity") {
             console.log('hello');
             this.profanity = true;
           }
+        },
+        complete: () => {
+          this.postForm.controls.imageUrl.setValue('')
+          this.postForm.controls.text.setValue('')
         }
-      )
+    })
   }
 }

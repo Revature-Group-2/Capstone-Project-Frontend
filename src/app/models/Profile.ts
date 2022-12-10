@@ -3,6 +3,36 @@ export interface IChangePassword {
     newPassword: string
 }
 
+export interface IGeneralInformation {
+    firstName: string
+    lastName: string
+    gender: string
+    dob: string
+    email: string
+    phoneNumber: string
+}
+
+export interface IProfileLocation {
+    currentCity: string
+    currentCountry: string
+    bornCity: string
+    bornCountry: string
+}
+
+export interface IProfileEducation {
+    schoolName: string
+}
+
+export interface IProfileWork {
+    jobTitle: string
+    companyName: string
+    companyUrl: string
+}
+
+export interface IProfileMaritalStatus {
+    maritalStatus: string
+}
+
 export interface IUser {
     id: number
     email: string
@@ -12,47 +42,28 @@ export interface IUser {
 }
 
 export interface IProfile {
-    id: number,
-    backgroundImageUrl: string,
+    id: number
+    backgroundImageUrl: string
+
+    currentCity: string
+    currentCountry: string
+
+    bornCity: string
+    bornCountry: string
+
+    dob: string
+    gender: string
+    maritalStatus: string
+    schoolName: string
+
+    jobTitle: string
+    companyName: string
+    companyUrl: string
     
-    currentCity: string,
-    currentCountry: string,
-
-    bornCity: string,
-    bornCountry: string,
-
-    dob: string,
-    gender: string,
-    martialStatus: string,
-    schoolName: string,
-
-    jobTitle: string,
-    companyName: string,
-    companyUrl: string,
-
+    phoneNumber: string
 
     owner: IUser
 }
 
-export interface IProfileHeroBanner {
-    avatarImageUrl: string,
-    backgroundImageUrl: string,
-    firstName: string,
-    lastName: string,
-    currentCity: string,
-    currentCountry: string
-}
 
-export interface IProfilePersonalInfo {
-    bornCity: string,
-    bornCountry: string,
 
-    martialStatus: string,
-
-    jobTitle: string,
-
-    companyName: string,
-    companyUrl: string,
-
-    schoolName: string
-}

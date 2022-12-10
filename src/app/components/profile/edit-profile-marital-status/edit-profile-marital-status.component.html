@@ -1,0 +1,40 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="max-w-2xl m-auto pb-3">
+    <h3 class="pt-3 mb-1">Your marital status</h3>
+
+    <p class="col-span-2">
+        Let everyone know what your current marital status is.
+    </p>
+
+    <span class="px-4 pt-2 grid gap-x-3 gap-y-1 max-w-2xl">
+        <mat-form-field>
+            <mat-label>Marital Status</mat-label>
+            <mat-select formControlName="maritalStatus">
+                <mat-option value=""></mat-option>
+                <mat-option value="Single">Single</mat-option>
+                <mat-option value="Married">Married</mat-option>
+                <mat-option value="Widow/Widower">Widow/Widower</mat-option>
+                <mat-option value="Everything too complicated">Everything too complicated</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </span>
+
+    <span 
+        class="flex justify-center font-semibold mb-2"
+        *ngIf="hasResponse"
+        [ngClass]="{
+            'text-red-500' : hasError,
+            'text-blue-500': !hasError
+        }"
+    >
+        {{ responseMessage }}
+    </span>
+
+    <div class="flex justify-center">
+        <button 
+            mat-raised-button 
+            color="primary" 
+            class="mt-2 btn-block tracking-wider w-1/2 flex m-auto" 
+            type="submit"
+        >Update</button>
+    </div>
+</form>
