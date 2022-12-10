@@ -33,3 +33,15 @@
     white-space: nowrap;
     width: 1px;
 }
+
+#addTransitionalAppearance {
+    animation-name: transitionalAppearance;
+    animation-duration: 0.3s;
+}
+
+@keyframes transitionalAppearance {
+    0%   { opacity: 0; }
+    25%  { opacity: .2;}
+    50%  { opacity: .6;}
+    100% { opacity: 1}
+}
