@@ -75,4 +75,8 @@ export class ProfileService {
     return this.http.post<IProfile>(`${this.profileUrl}/profile-background`, {url}, this.headers);
   } 
 
+  updateProfileAvatar(url: string): Observable<IProfile> {
+    return this.http.post<IProfile>(`${this.profileUrl}/profile-avatar`, {url}, this.headers);
+  }
+
 }

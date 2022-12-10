@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { IImage } from 'src/app/models/IImage';
 import { IProfile } from 'src/app/models/Profile';
 import { IProfileHeroBanner } from 'src/app/models/ProfileHeroBanner';
+import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { environment } from 'src/environments/environment';
@@ -15,6 +16,7 @@ import { EditProfileComponent } from '../edit-profile/edit-profile.component';
   styleUrls: ['./profile-hero-banner.component.css']
 })
 export class ProfileHeroBannerComponent implements OnInit {
+  isAvatarUploadShown: boolean = false;
 
   @Input()
   updateProfile (profile: IProfile): void {};
@@ -49,18 +51,16 @@ export class ProfileHeroBannerComponent implements OnInit {
       reader.onload = () => {
         this.imageService.uploadImage(this.decompressImage(reader.result)).subscribe({
           next: (response : any) => {
+            let url = `${environment.baseUrl}/image/${response.id}`;
+
             if (elementToUpdate == 'background') {
-              let url = `${environment.baseUrl}/image/${response.id}`;
               this.heroBannerInformation.backgroundImageUrl = url;
 
               /* Update profile's background URL to a new one */
-              this.profileService.updateProfileBackground(url).subscribe({
-                next: (response) => {
-                  console.log(response)
-                }
-              })
+              this.profileService.updateProfileBackground(url).subscribe()
             } else if (elementToUpdate == 'avatar') {
-
+              this.heroBannerInformation.avatarImageUrl = url;
+              this.profileService.updateProfileAvatar(url).subscribe();
             }
           },
           error: errorResponse => {
