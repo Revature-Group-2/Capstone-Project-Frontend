@@ -3,12 +3,36 @@
 <div class="mx-5 lg:mx-7 xl:mx-20">
     
     <div class="grid grid-cols-4 gap-x-3">
-        <div class="bg-white box-shadow px-2 py-4">
-           <h2>Friends:</h2>
+        <div class="bg-white box-shadow max-h-96">
+            <app-search-user-sidebar></app-search-user-sidebar>
         </div>
 
         <div class="col-span-3">
+
+            <!-- Search form-->
+            <form class="form relative">
+                <mat-form-field class="full-width px-4 py-2 bg-white  box-shadow grid grid-cols-5" appearance="outline">
+                    <mat-label class="w-4/5">Search friends on Social Sources</mat-label>
+                    <input matInput class="bg-white col-span-3 w-4/5">
+
+                    <button class="absolute z-20 -top-2 -right-3 grid grid-flow-col auto-cols-max align-middle items-center content-center h-[52px] bg-blue-600
+                                    text-white font-semibold tracking-wider px-4" id="search-button">
+                        <mat-icon>search</mat-icon>
+                        <p [ngStyle]="{'margin': '0'}">Search</p>
+                    </button>
+                </mat-form-field>
+            </form>
+
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-4">
             <app-search-user-card></app-search-user-card>
+            <app-search-user-card></app-search-user-card>
+            <app-search-user-card></app-search-user-card>
+            <app-search-user-card></app-search-user-card>
+            <app-search-user-card></app-search-user-card>
+            <app-search-user-card></app-search-user-card>
+            <app-search-user-card></app-search-user-card>
+            <app-search-user-card></app-search-user-card>
+            </div>
         </div>
     </div>
 </div>

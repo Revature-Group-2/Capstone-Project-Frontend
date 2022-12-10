@@ -1,7 +1,7 @@
-<div class="">
+<div class="box-shadow">
     <div class="rounded-lg shadow-lg bg-white max-w-[250px] box-shadow">
-        <a class="flex justify-center align-middle bg-[#c9c9c9]" [href]="'/profile?id=' + user.id">
-            <img class="rounded-t-lg max-w-[200px]" [src]="user.avatarImageUrl" alt=""/>
+        <a class="flex justify-center align-middle" [routerLink]="'/profile'" [queryParams]="{id: user.id}" >
+            <img class="rounded-t-lg w-full" src="assets/images/search-no-image.svg" alt=""/>
         </a>
 
         <mat-divider></mat-divider>

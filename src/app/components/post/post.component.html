@@ -8,7 +8,7 @@
                 />
             </div>
             <mat-card-title>
-                <a [href]="'/profile?id=' + post.author.id ">
+                <a [routerLink]="'/profile'" [queryParams]="{id: post.author.id}" >
                     {{post.author.firstName}} 
                     {{post.author.lastName}}
                 </a>
