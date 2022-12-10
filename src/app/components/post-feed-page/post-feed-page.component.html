@@ -10,29 +10,30 @@
 
 
     <div class="w-2/3 mt-20 sidebyside post-feed-container flex justify-center">
-        <form class="form mt-20" *ngIf="!createPost; else createPostTemplate">
-            <mat-form-field class="full-width" appearance="fill">
+        <form class="form mt-20 bg-white px-4 py-2 box-shadow" *ngIf="!createPost; else createPostTemplate">
+            <mat-form-field class="full-width" appearance="outline" color="basic">
                 <mat-label>Something on your mind?</mat-label>
                 <input matInput (focus)="toggleCreatePost()">
             </mat-form-field>
         </form>
 
         <ng-template #createPostTemplate>
-            <form class="form mt-20" [formGroup]="postForm" (ngSubmit)="submitPost($event)">
-                <mat-form-field class="full-width" appearance="fill">
+            <form class="form mt-20 bg-white px-4 py-2 box-shadow" [formGroup]="postForm" (ngSubmit)="submitPost($event)">
+                <mat-form-field class="full-width" appearance="outline" color="basic">
                     <mat-label>Make a Post</mat-label>
-                    <textarea matInput autofocus formControlName="text"></textarea>
+                    <textarea class="min-h-[120px]" id="no-resize" matInput autofocus formControlName="text"></textarea>
                 </mat-form-field>
-                <mat-form-field class="full-width" appearance="fill">
+                <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Add an Image?</mat-label>
                     <input matInput formControlName="imageUrl">
                 </mat-form-field>
                 <div *ngIf="this.profanity">
                     No profanity!
                 </div>
-                <div align="end">
+
+                <div class="flex justify-end w-full">
                     <button mat-raised-button color="warn" (click)="toggleCreatePost()">Cancel</button>
-                    <button mat-raised-button color="primary" (click)="submitPost($event)">Post</button>
+                    <button class="mx-5" mat-raised-button color="primary" (click)="submitPost($event)">Post</button>
                 </div>
 
             </form>
