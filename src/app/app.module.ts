@@ -36,6 +36,7 @@ import { PostCreateComponent } from './components/post-create/post-create.compon
 import { PostDeleteButtonComponent } from './components/shared/post-delete-button/post-delete-button.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { SearchUserCardComponent } from './components/search-user-card/search-user-card.component';
+import { SearchUserSidebarComponent } from './components/search-user-sidebar/search-user-sidebar.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { SearchUserCardComponent } from './components/search-user-card/search-us
     PostCreateComponent,
     PostDeleteButtonComponent,
     SearchPageComponent,
-    SearchUserCardComponent
+    SearchUserCardComponent,
+    SearchUserSidebarComponent
   ],
   imports: [
     BrowserModule,

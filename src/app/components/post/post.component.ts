@@ -23,7 +23,6 @@ export class PostComponent implements OnInit {
   constructor(private postService: PostService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    console.log(this.post)
   }
 
   toggleReplyToPost = () => {

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { IUser } from 'src/app/models/Profile';
+import { Component, Input, OnInit } from '@angular/core';
+import { IProfile, IUser, Profile } from 'src/app/models/Profile';
 
 @Component({
   selector: 'app-search-user-card',
@@ -7,6 +7,9 @@ import { IUser } from 'src/app/models/Profile';
   styleUrls: ['./search-user-card.component.css']
 })
 export class SearchUserCardComponent implements OnInit {
+
+  @Input()
+  profile: IProfile = new Profile();
 
   user: IUser = {
     id: 0,
