@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { FourOFourPageComponent } from './pages/four-o-four-page/four-o-four-page.component';
 import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: "post-feed", component: PostFeedPageComponent},
   { path: "friends", component: FriendsPageComponent },
   { path: "profile", component: ProfilePageComponent },
-  { path: "404", component: FourOFourPageComponent }
+  { path: "404", component: FourOFourPageComponent },
+  { path: "chat", component: ChatComponent }
 ];
 
 @NgModule({

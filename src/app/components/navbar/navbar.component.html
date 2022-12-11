@@ -19,6 +19,15 @@
                 >
                     <mat-icon [color]="router.url === '/profile' ? 'primary' : ''">account_circle</mat-icon>
                 </a>
+                <a 
+                    routerLink="/chat"
+                    [ngClass]="{
+                        'active-icon relative' : router.url === '/chat'
+                    }" 
+                    class="flex items-center"
+                >
+                    <mat-icon [color]="router.url === '/chat' ? 'primary' : ''">chat_bubble_outline</mat-icon>
+                </a>
             </div>
             <button mat-button (click)="logout();">Logout</button>
         </div>

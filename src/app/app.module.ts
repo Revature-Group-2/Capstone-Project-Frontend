@@ -27,6 +27,7 @@ import { ProfileHeroBannerComponent } from './components/profile/profile-hero-ba
 import { FourOFourPageComponent } from './pages/four-o-four-page/four-o-four-page.component';
 import { VoteButtonComponent } from './components/shared/vote-button/vote-button.component';
 import { PostDeleteButtonComponent } from './components/shared/post-delete-button/post-delete-button.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { PostDeleteButtonComponent } from './components/shared/post-delete-butto
     ProfileHeroBannerComponent,
     FourOFourPageComponent,
     VoteButtonComponent,
-    PostDeleteButtonComponent
+    PostDeleteButtonComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
