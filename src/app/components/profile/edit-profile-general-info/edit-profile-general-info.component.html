@@ -1,0 +1,90 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="max-w-2xl m-auto pb-3">
+    <h3 class="pt-3 mb-1">General</h3>
+
+    <p class="col-span-2">
+        Change some additional information about yourself. After changing an email, the new email is going to 
+        be required to successfully login.
+    </p>
+
+    <span class="px-4 pt-2 grid gap-x-3 gap-y-1 max-w-2xl">
+        <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input matInput type="text" name="firstName" formControlName="firstName" >
+            <mat-error>A first name field is required.</mat-error>
+        </mat-form-field>
+
+        
+        <mat-form-field>
+            <mat-label>Last Name</mat-label>
+            <input
+                matInput 
+                type="text" 
+                placeholder=""
+                formControlName="lastName"
+            >
+            <mat-error>A last name field is required.</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field>
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+                <mat-option value="other">Other</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Date of Birth</mat-label>
+            <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="dob"
+            >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>Invalid date format</mat-error>
+        </mat-form-field>
+
+        
+        <mat-form-field class="col-span-2">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" formControlName="email" />
+            <mat-error>Invalid email format</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="col-span-2">
+            <mat-label>Phone Number</mat-label>
+            <input 
+                matInput
+                appOnlyNumbers
+                type="text" 
+                formControlName="phoneNumber"
+                maxlength="10"
+            >
+            <mat-error>A phone number consists of 10 numbers</mat-error>
+        </mat-form-field>
+    </span>
+
+    <span 
+        class="flex justify-center font-semibold mb-2"
+        *ngIf="hasResponse"
+        [ngClass]="{
+            'text-red-500' : hasError,
+            'text-blue-500': !hasError
+        }"
+    >
+        {{ responseMessage }}
+    </span>
+
+    <div class="flex justify-center">
+        <button 
+            mat-raised-button 
+            color="primary" 
+            class="mt-2 btn-block tracking-wider w-1/2 flex m-auto" 
+            type="submit"
+        >Update</button>
+    </div>
+</form>

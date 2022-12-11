@@ -8,14 +8,24 @@
                 <img class="w-10" src="assets/images/favicon-tab.png" alt="Logo">
                 <span class="text-shadow text-blue-800">Social Sources</span>
             </span>
-            <div class="flex items-center"
-            >
+            <div class="flex items-center">
+                <a 
+                    routerLink="/post-feed"
+                    [ngClass]="{
+                        'active-icon relative' : router.url === '/post-feed'
+                    }" 
+                    class="flex items-center"
+                >
+                    <mat-icon [color]="router.url === '/post-feed' ? 'primary' : ''">feedback</mat-icon>
+                </a>
+
+
                 <a 
                     routerLink="/profile"
                     [ngClass]="{
                         'active-icon relative' : router.url === '/profile'
                     }" 
-                    class="flex items-center"
+                    class="flex items-center ml-12"
                 >
                     <mat-icon [color]="router.url === '/profile' ? 'primary' : ''">account_circle</mat-icon>
                 </a>
@@ -27,6 +37,16 @@
                     class="flex items-center"
                 >
                     <mat-icon [color]="router.url === '/chat' ? 'primary' : ''">chat_bubble_outline</mat-icon>
+                </a>
+
+                <a 
+                    routerLink="/search"
+                    [ngClass]="{
+                        'active-icon relative' : router.url === '/search'
+                    }" 
+                    class="flex items-center ml-12"
+                >
+                    <mat-icon [color]="router.url === '/search' ? 'primary' : ''">search</mat-icon>
                 </a>
             </div>
             <button mat-button (click)="logout();">Logout</button>

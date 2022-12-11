@@ -15,6 +15,16 @@
 
         <li>
             <a class="flex items-center text-sm py-2 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out cursor-pointer" 
+                (click)="clickedButton($event, 'Location')">
+
+                <mat-icon>location_on</mat-icon>
+
+                <span class="ml-2">Location</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="flex items-center text-sm py-2 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out cursor-pointer" 
                 (click)="clickedButton($event, 'Education')"
             >
 
@@ -37,11 +47,11 @@
         </li>
         <li class="mb-4">
             <a class="flex items-center text-sm py-2 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-blue-600 hover:bg-blue-50 transition duration-300 ease-in-out cursor-pointer"
-                (click)="clickedButton($event, 'Martial Status')"
+                (click)="clickedButton($event, 'Marital Status')"
             >
                 <mat-icon>child_friendly</mat-icon>
 
-                <span class="ml-2">Martial Status</span>
+                <span class="ml-2">Marital Status</span>
             </a>
       </li>
     </ul>
