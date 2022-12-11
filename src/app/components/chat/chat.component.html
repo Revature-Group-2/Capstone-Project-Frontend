@@ -3,6 +3,9 @@
     <div className="chat-box" *ngIf="userData.connected">
         <div className="memeber-list">
             <ul>
+                <li *ngFor="let room of rooms">
+                    {{room}}
+                </li>
             </ul>
         </div>
     </div>
