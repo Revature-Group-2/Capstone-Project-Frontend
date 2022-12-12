@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 import { defer, Observable } from 'rxjs';
 import User from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,6 +21,7 @@ describe('UserCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ MatDividerModule, MatCardModule ], 
       declarations: [ UserCardComponent ],
       providers: [{provide: AuthService, useValue: authServiceStub}]
     })

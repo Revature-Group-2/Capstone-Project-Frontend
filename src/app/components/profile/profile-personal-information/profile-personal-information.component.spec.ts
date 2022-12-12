@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ProfilePersonalInformationComponent } from './profile-personal-information.component';
 
@@ -8,6 +10,7 @@ describe('ProfilePersonalInformationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ MatIconModule ],
       declarations: [ ProfilePersonalInformationComponent ]
     })
     .compileComponents();

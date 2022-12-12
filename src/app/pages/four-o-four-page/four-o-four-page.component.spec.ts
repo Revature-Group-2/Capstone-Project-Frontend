@@ -1,6 +1,15 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FourOFourPageComponent } from './four-o-four-page.component';
+
+@Component({
+  selector: 'app-navbar',
+  template: ''
+})
+class MockNavbar{
+
+}
 
 describe('FourOFourPageComponent', () => {
   let component: FourOFourPageComponent;
@@ -8,7 +17,7 @@ describe('FourOFourPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FourOFourPageComponent ]
+      declarations: [ FourOFourPageComponent, MockNavbar ]
     })
     .compileComponents();
 

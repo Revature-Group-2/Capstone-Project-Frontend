@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { defer, Observable } from 'rxjs';
 import Post from 'src/app/models/Post';
 import User from 'src/app/models/User';
@@ -31,6 +32,7 @@ describe('VoteButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ MatIconModule ],
       declarations: [ VoteButtonComponent ],
       providers: [
         {provide: VoteService, useValue: voteServiceSpy},
