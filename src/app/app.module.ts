@@ -25,8 +25,18 @@ import { EditProfileSidebarComponent } from './components/profile/edit-profile-s
 import { EditProfileSecuritySettingsComponent } from './components/profile/edit-profile-security-settings/edit-profile-security-settings.component';
 import { ProfileHeroBannerComponent } from './components/profile/profile-hero-banner/profile-hero-banner.component';
 import { FourOFourPageComponent } from './pages/four-o-four-page/four-o-four-page.component';
+import { EditProfileGeneralInfoComponent } from './components/profile/edit-profile-general-info/edit-profile-general-info.component';
+import { OnlyNumbersDirective } from './directives/only-numbers.directive';
 import { VoteButtonComponent } from './components/shared/vote-button/vote-button.component';
+import { EditProfileLocationComponent } from './components/profile/edit-profile-location/edit-profile-location.component';
+import { EditProfileEducationComponent } from './components/profile/edit-profile-education/edit-profile-education.component';
+import { EditProfileWorkComponent } from './components/profile/edit-profile-work/edit-profile-work.component';
+import { EditProfileMaritalStatusComponent } from './components/profile/edit-profile-marital-status/edit-profile-marital-status.component';
+import { PostCreateComponent } from './components/post-create/post-create.component';
 import { PostDeleteButtonComponent } from './components/shared/post-delete-button/post-delete-button.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { SearchUserCardComponent } from './components/search-user-card/search-user-card.component';
+import { SearchUserSidebarComponent } from './components/search-user-sidebar/search-user-sidebar.component';
 
 
 @NgModule({
@@ -48,8 +58,18 @@ import { PostDeleteButtonComponent } from './components/shared/post-delete-butto
     EditProfileSecuritySettingsComponent,
     ProfileHeroBannerComponent,
     FourOFourPageComponent,
+    EditProfileGeneralInfoComponent,
+    OnlyNumbersDirective,
     VoteButtonComponent,
-    PostDeleteButtonComponent
+    EditProfileLocationComponent,
+    EditProfileEducationComponent,
+    EditProfileWorkComponent,
+    EditProfileMaritalStatusComponent,
+    PostCreateComponent,
+    PostDeleteButtonComponent,
+    SearchPageComponent,
+    SearchUserCardComponent,
+    SearchUserSidebarComponent
   ],
   imports: [
     BrowserModule,

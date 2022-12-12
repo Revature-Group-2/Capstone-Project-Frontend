@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
@@ -7,7 +8,9 @@ import { ProfileService } from 'src/app/services/profile.service';
   templateUrl: './edit-profile-security-settings.component.html',
   styleUrls: ['./edit-profile-security-settings.component.css']
 })
-export class EditProfileSecuritySettingsComponent {
+export class EditProfileSecuritySettingsComponent implements OnDestroy {
+  onSubmitSubscription: Subscription;
+
   hasError: any = {
     oldPassword: false,
     newPassword: false,
@@ -19,19 +22,15 @@ export class EditProfileSecuritySettingsComponent {
 
   message!: string;
 
-  constructor(private profileService: ProfileService){};
+  constructor(private profileService: ProfileService){}
 
   form = new FormGroup({
     oldPassword: new FormControl<string>('', Validators.required),
     newPassword: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(6),
-      Validators.pattern('')
     ]),
-    reenteredPassword: new FormControl<string>('', [
-      Validators.required,
-      Validators.pattern('')
-    ])
+    reenteredPassword: new FormControl<string>('', Validators.required)
   })
 
   submit() {
@@ -46,20 +45,32 @@ export class EditProfileSecuritySettingsComponent {
     Object.keys(this.hasError).forEach( key => { this.hasError[key] = false;})
     this.message = '';
 
-    this.profileService.changePassword({
-      oldPassword: this.form.value.oldPassword as string,
-      newPassword: this.form.value.newPassword as string
-    }).subscribe({
-      next: response => {
-        this.isUpdated = true;
-        this.message = response.message;
-      },
-      error: error => {
-        this.hasError = {...this.hasError, oldPassword: true};
-        this.message = error.error;
-      }
-    })
+    if (this.form.valid) {
+      this.onSubmitSubscription = this.profileService.changePassword({
+        oldPassword: this.form.value.oldPassword as string,
+        newPassword: this.form.value.newPassword as string
+      }).subscribe({
+        next: response => {
+          this.form.controls.oldPassword.markAsUntouched()
+          this.form.controls.newPassword.markAsUntouched()
+          this.form.controls.reenteredPassword.markAsUntouched()
 
+          this.isUpdated = true;
+          this.message = response.message;
+
+          this.form.reset();
+
+        },
+        error: error => {
+          this.hasError = {...this.hasError, oldPassword: true};
+          this.message = error.error;
+        }
+      })
+    }
   }
+
+  ngOnDestroy(): void {
+    this.onSubmitSubscription?.unsubscribe();
+  };
 
 }

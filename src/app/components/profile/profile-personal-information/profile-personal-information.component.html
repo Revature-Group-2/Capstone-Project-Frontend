@@ -15,7 +15,7 @@
         *ngIf="profilePersonalInfo.jobTitle"
     >
         <mat-icon class="scale-75">work</mat-icon> 
-        <span>{{ profilePersonalInfo.jobTitle }} at 
+        <span>{{ profilePersonalInfo.jobTitle }} {{ profilePersonalInfo.companyUrl && 'at' }} 
             <a 
                 class="text-blue-600 underline" 
                 [href]="profilePersonalInfo.companyUrl" 
@@ -41,10 +41,10 @@
 
     <li 
         class="flex items-center mb-1"
-        *ngIf="profilePersonalInfo.martialStatus"
+        *ngIf="profilePersonalInfo.maritalStatus"
     >
         <mat-icon class="scale-75">favorite</mat-icon>
-        <span>Martial Status: <b>{{ profilePersonalInfo.martialStatus }}</b></span>
+        <span>Marital Status: <b>{{ profilePersonalInfo.maritalStatus }}</b></span>
     </li>
 
     <ng-content></ng-content>
