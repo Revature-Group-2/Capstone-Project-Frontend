@@ -1,13 +1,29 @@
 <app-navbar></app-navbar>
 <div className="container">
-    <div className="chat-box" *ngIf="userData.connected">
-        <div className="memeber-list">
+    <div class="flex flex-row bg-white" *ngIf="userData.connected">
+        <div class="float-left">
+            <input type="text" classname="input-room" placeholder="Type room name" [value]="roomName"
+                (change)="handleRoom($event)">
+            <button type="button" class="create-button" (click)="createRoom()">Create</button>
+            <button type="button" class="reload-button" (click)="reloadRooms()">Reload</button>
             <ul>
-                <li *ngFor="let room of rooms">
+                <li *ngFor="let room of rooms" (click)="changeTab($event)">
                     {{room}}
+                    <button *ngIf="!chats[room]" value="{{ room }}" (click)="joinRoom($event)">Join</button>
                 </li>
             </ul>
         </div>
+        <div class="float-right">
+            <div class="float-right">
+                <ul class="chat-messages">
+                    <li *ngFor="let message of chats[tab]">{{ message.senderName }}: {{ message.message }}</li>
+                </ul>
+            </div>
+            <div class="send-message">
+                <input type="text" class="input-message" placeholder="Type your message here"
+                    [value]="userData.message" (change)="handleMessage($event)">
+                <button type="button" class="send-button" (click)="sendValue()">Send</button>
+            </div>
+        </div>
     </div>
-    
 </div>

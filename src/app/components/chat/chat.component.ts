@@ -14,7 +14,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ChatComponent implements OnInit{
 
-  chats : any = {};
+  chats : any = {
+    public: [],
+  };
 
   tab: string = 'public';
 
@@ -28,6 +30,8 @@ export class ChatComponent implements OnInit{
     connected: false,
     message: '',
   };
+
+  public roomName : any = '';
 
   constructor(
     private authService : AuthService,
@@ -75,8 +79,11 @@ export class ChatComponent implements OnInit{
         }
         break;
       case "MESSAGE":
+        if(!this.chats[payloadData.roomName]) {
+          this.chats[payloadData.roomName] = [];
+        }
         this.chats[payloadData.roomName].push(payloadData);
-        this.chats[payloadData.roomName] = new Map(this.chats[payloadData.roomName]);
+        //this.chats[payloadData.roomName] = new Map(this.chats[payloadData.roomName]);
       }
   }
 
@@ -88,6 +95,7 @@ export class ChatComponent implements OnInit{
   handleMessage = (event: any) => {
     const {value} = event.target;
     this.userData.message = value;
+    console.log(this.userData.message);
   }
 
   sendValue = () => {
@@ -98,10 +106,42 @@ export class ChatComponent implements OnInit{
         message: this.userData.message,
         status: "MESSAGE"
       };
+      console.log('from sendvalue', `/app/message/${this.tab}`);
       this.stompClient.send(`/app/message/${this.tab}`, {}, JSON.stringify(chatMessage));
       this.userData.message = '';
     }
   }
 
+  createRoom = () => {
+    this.stompClient.subscribe(`/chatroom/${this.roomName}`, this.onMessageReceived);
+    this.tab = this.roomName;
+    this.roomName = "";
+    this.http.get(environment.baseUrl + "/chatrooms").subscribe((response) => {
+      this.rooms = response;
+      console.log("rooms", this.rooms);
+      console.log("tab", this.tab);
+    })
+  }
+
+  handleRoom = (event: any) => {
+    this.roomName = event.target.value;
+  }
+
+  reloadRooms = () => {
+    this.http.get(environment.baseUrl + "/chatrooms").subscribe((response) => {
+      this.rooms = response;
+    })
+  }
+
+  joinRoom = (event: any) => {
+    let roomName = event.target.value;
+    this.stompClient.subscribe(`/chatroom/${roomName}`, this.onMessageReceived);
+    this.tab = roomName;
+  }
+
+  changeTab = (event: any) => {
+    this.tab = event.target.textContent;
+    console.log(this.tab);
+  }
 
 }
