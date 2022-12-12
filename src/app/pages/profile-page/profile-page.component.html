@@ -1,35 +1,43 @@
 <app-navbar></app-navbar>
 <div class="mx-5 lg:mx-7 xl:mx-20">
 
-    <app-profile-hero-banner [isEditable]="isEditable" [heroBannerInformation]="profileHeroBanner"></app-profile-hero-banner>
+    <app-profile-hero-banner 
+        [isEditable]="isEditable" 
+        [heroBannerInformation]="profileHeroBanner"
+        [updateProfile]="updateProfile"
+    ></app-profile-hero-banner>
 
     <div class="mt-4 grid grid-cols-[270px_1fr_1fr] lg:grid-cols-[360px_1fr_1fr] xl:grid-cols-4 gap-4">
 
         <aside>
             <!-- Personal Information | Container -->
-            <div class="bg-white box-shadow p-4">
+            <div class="bg-white box-shadow p-4"
+                *ngIf="!isProfileToDisplay || isEditable"
+            >
                 <app-profile-personal-information [profilePersonalInfo]="profilePersonalInfo">
                     <button
-                        *ngIf="isEditable; else elseBlock" 
+                        *ngIf="isEditable" 
                         class="w-full mt-2" 
                         mat-raised-button color="primary"
-                    >Add Information</button>
-                    <ng-template #elseBlock>
-                        The personal information has not been provided
-                    </ng-template>
+                        (click)="openDialog()"
+                    >+ Add Information</button>
                 </app-profile-personal-information>
             </div>
 
             <!-- List of Friends-->
-            <div class="mt-4 py-4 bg-white box-shadow">
+            <div class="py-4 bg-white box-shadow"
+                [ngClass]="{
+                    'mt-4' : !isProfileToDisplay || isEditable
+                }"
+            >
                 <h4 class="px-4 flex items-center justify-between">
                     <span class="flex items-center">
                         <mat-icon>group</mat-icon>
                         <span class="ml-2 text-base font-semibold">
-                            Friends
+                            Following 
                         </span>
                     </span>
-                    <a class="text-blue-600 underline">All 64 friends</a>
+                    <a class="text-blue-600 underline">All 64 followings</a>
                 </h4>
 
                 <ul class="grid grid-cols-3 grid-rows-2 gap-x-1.5 gap-y-1 px-1">
@@ -71,21 +79,10 @@
         
 
         <div class="col-span-2">
-            <div class="bg-white px-4 py-2 mb-4 box-shadow">
-                <form class="form">
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Make a Post</mat-label>
-                        <textarea matInput autofocus formControlName="text"></textarea>
-                    </mat-form-field>
-                    <mat-form-field class="full-width" appearance="fill">
-                        <mat-label>Add an Image?</mat-label>
-                        <input matInput formControlName="imageUrl">
-                    </mat-form-field>
-                    <div align="end">
-                        <button mat-raised-button color="warn" >Cancel</button>
-                        <button mat-raised-button color="primary" >Post</button>
-                    </div>
-                </form>
+            <div class="bg-white px-4 py-2 mb-4 box-shadow"
+                *ngIf="isEditable"
+            >
+              <app-post-create [inputPosts]="inputPosts" (outputPosts)="updatePosts($event)"></app-post-create>
             </div>
             
 

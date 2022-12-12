@@ -5,27 +5,56 @@
             class="absolute top-6 left-16"
             *ngIf="isEditable"
         >
-            <label for="file" class="text-white/40 text-shadow hover:text-white/90 transition-colors cursor-pointer">
-                <mat-icon class="scale-125">photo_camera</mat-icon>
-            </label>
-            <input 
-                type="file" 
-                id="file" 
-                accept="image/jpg, image/jpeg, image/png"
-                (change)="'Do something'" 
-            />
+            <form>
+                <label for="file" class="text-white/40 text-shadow hover:text-white/90 transition-colors cursor-pointer">
+                    <mat-icon class="scale-125">photo_camera</mat-icon>
+                </label>
+                <input 
+                    name="background"
+                    type="file" 
+                    id="file" 
+                    accept="image/jpg, image/jpeg, image/png"
+                    (change)="onImageChange($event, 'background')" 
+                />
+            </form>
         </div>    
-
-        <div class="h-64"
-             [style.background-image]="'url(' + heroBannerInformation.backgroundImageUrl + ')'"
-             id="background">
+    
+        <div class="h-64" id="background">
+            <img class="h-64 object-cover w-full " [src]="heroBannerInformation.backgroundImageUrl">
         </div>
 
         <div class="grid grid-flow-col grid-cols-[max-content_1fr]" id="user_photo">
-            <img class="relative bg-white w-[120px] h-[120px] border-[5px] rounded-full border-white ml-5 mr-3 mt-3" 
+            <span class="relative">
+                <img class="relative bg-white w-[120px] h-[120px] border-[5px] rounded-full border-white ml-5 mr-3 mt-3 object-cover" 
                  id="avatar" 
                  [src]="heroBannerInformation.avatarImageUrl" alt="user's photo"
-            />
+                 (mouseenter) = "isAvatarUploadShown = true"
+                />
+
+
+                <div 
+                    (mouseleave) = "isAvatarUploadShown = false"
+                    *ngIf="isEditable && isAvatarUploadShown"
+                    class="flex absolute z-20 top-[11px] left-[19px] rounded-full w-[122px] h-[122px] bg-slate-800/70 justify-center items-center"
+                    id="addTransitionalAppearance"
+                >
+                    <form>
+                        <label for="another" class="text-white/40 text-shadow hover:text-white/60 transition-colors cursor-pointer">
+                            <mat-icon class="scale-125">photo_camera</mat-icon>
+                        </label>
+                        <input 
+                            name="avatar"
+                            type="file" 
+                            id="another" 
+                            accept="image/jpg, image/jpeg, image/png"
+                            (change)="onImageChange($event, 'avatar')" 
+                        />
+                    </form>
+                    
+                </div> 
+
+            </span>
+            
             
             <div class="grid items-end">
                 <div class="flex items-center justify-between w-full">
@@ -44,8 +73,9 @@
                 </div>
                 
                 <span class="font-semibold text-sm pb-1 text-gray-700">
-                    {{ heroBannerInformation.currentCity }}  
-                    {{ heroBannerInformation.currentCity && heroBannerInformation.currentCountry ? ', ': '' }}
+                    {{ heroBannerInformation.currentCity }}{{ 
+                        heroBannerInformation.currentCity && heroBannerInformation.currentCountry ? ', ': '' 
+                    }}
                     {{ heroBannerInformation.currentCountry }}
                 </span>
             </div>

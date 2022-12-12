@@ -1,0 +1,19 @@
+<div class="box-shadow">
+    <div class="rounded-lg shadow-lg bg-white max-w-[250px] box-shadow">
+        <a class="flex justify-center align-middle" [routerLink]="'/profile'" [queryParams]="{id: user.id}" >
+            <img class="rounded-t-lg w-full" src="assets/images/search-no-image.svg" alt=""/>
+        </a>
+
+        <mat-divider></mat-divider>
+
+        <div class="grid p-6">
+            <p class="text-gray-700 text-base mb-4 text-center">
+                {{ user.firstName + ' ' + user.lastName }}
+            </p>
+            <button 
+                type="button" 
+                class="text-center px-6 py-2.5 tracking-wider bg-blue-600 text-white font-medium text-xs uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+            >+ Subscribe</button>
+        </div>
+    </div>
+</div>
