@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { defer } from 'rxjs';
+import { defer, of } from 'rxjs';
 import { Observable, throwError } from 'rxjs';
 import Post from 'src/app/models/Post';
 import { AuthService } from 'src/app/services/auth.service';
@@ -37,7 +37,7 @@ describe('PostFeedPageComponent', () => {
   postServiceStub = {
     getAllSubscribedPosts(): Observable<Post[]> {
       let posts: Post[] = [];
-      return defer(()=>Promise.resolve(posts));
+      return of(posts);
     },
     upsertPost(post: Post): Observable<any> {
       //return defer(()=>Promise.reject({error: "profanity"}))
@@ -72,9 +72,6 @@ describe('PostFeedPageComponent', () => {
   it('profanity error sets profanity to true',()=> {
     let mock = {preventDefault(){}};
     component.submitPost(mock);
-    setTimeout(()=>{
-      expect(component.profanity).toBeTruthy();
-    },2000);
-    expect(true).toBeTruthy;
+    expect(component.profanity).toBeTruthy();
   });
 });

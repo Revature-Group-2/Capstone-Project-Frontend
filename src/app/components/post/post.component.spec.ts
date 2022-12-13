@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
 import { RouterTestingModule } from '@angular/router/testing';
-import { defer, Observable } from 'rxjs';
+import { defer, Observable, of } from 'rxjs';
 import Post from 'src/app/models/Post';
 import User from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
@@ -35,7 +35,7 @@ describe('PostComponent', () => {
 
   postServiceStub = {
     upsertPost(post: Post): Observable<any>{
-      return defer(()=>Promise.resolve(post))
+      return of(post);
     }
   }
 
@@ -69,10 +69,7 @@ describe('PostComponent', () => {
     let oldVal = component.replyToPost;
     let mock = {preventDefault(){}};
     component.submitReply(mock);
-    setTimeout(()=>{
-      expect(component.replyToPost).toEqual(!oldVal);
-      //expect(true).toBeTruthy();
-    }, 2000);
+    expect(component.replyToPost).toEqual(!oldVal);
 
   });
 });

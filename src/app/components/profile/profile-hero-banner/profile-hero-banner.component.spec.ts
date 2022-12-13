@@ -11,7 +11,7 @@ describe('ProfileHeroBannerComponent', () => {
   let component: ProfileHeroBannerComponent;
   let fixture: ComponentFixture<ProfileHeroBannerComponent>;
   let authServiceStub: Partial<ProfileService>;
-  let dialogStub: Partial<MatDialog>;
+  let dialogSpy: jasmine.SpyObj<MatDialog>;
   let imageStub: Partial<ImageService>;
   let expectedHBI: IProfileHeroBanner =  {
     avatarImageUrl: "",
@@ -22,9 +22,7 @@ describe('ProfileHeroBannerComponent', () => {
     currentCountry: ""
   };
 
-  dialogStub = {
-
-  }
+  dialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
 
   imageStub = {
 
@@ -34,7 +32,7 @@ describe('ProfileHeroBannerComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ProfileHeroBannerComponent ],
       providers: [
-        {provide: MatDialog, useValue: dialogStub}, 
+        {provide: MatDialog, useValue: dialogSpy}, 
         {provide: ImageService, useValue: imageStub},
         {provide: ProfileService, useValue: authServiceStub}
       ]
@@ -51,4 +49,11 @@ describe('ProfileHeroBannerComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should open dialog', () => {
+    component.openDialog();
+    expect(dialogSpy.open).toHaveBeenCalled();
+  });
+
+
 });

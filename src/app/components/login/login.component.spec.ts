@@ -25,7 +25,6 @@ describe('LoginComponent', () => {
   let authServiceStub: Partial<AuthService>;
   let routerStub: Partial<Router>;
   let routerSpy: jasmine.SpyObj<Router>;
-  let loader = 
   routerSpy = jasmine.createSpyObj('Router',['navigate']);
 
   authServiceStub = {
@@ -57,7 +56,6 @@ describe('LoginComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
-    loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
