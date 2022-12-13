@@ -42,6 +42,7 @@ export class PostFeedPageComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.posts = [response, ...this.posts]
+          this.profanity = false;
           this.toggleCreatePost()
         }, 
         error: error => {
@@ -52,7 +53,13 @@ export class PostFeedPageComponent implements OnInit {
         complete: () => {
           this.postForm.controls.imageUrl.setValue('')
           this.postForm.controls.text.setValue('')
+          this.profanity = false;
         }
     })
+  }
+
+  toggleProfanity = () => {
+    console.log("profanity");
+    this.profanity = false;
   }
 }
