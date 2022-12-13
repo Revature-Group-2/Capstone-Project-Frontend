@@ -40,6 +40,7 @@ export class PostCreateComponent {
         next: (response) => {
           this.inputPosts = [response, ...this.inputPosts]
           this.outputPosts.emit(this.inputPosts);
+          this.profanity = false;
           this.toggleCreatePost()
         }, 
         error: error => {
@@ -50,7 +51,13 @@ export class PostCreateComponent {
         complete: () => {
           this.postForm.controls.imageUrl.setValue('')
           this.postForm.controls.text.setValue('')
+          this.profanity = false;
         }
     })
+  }
+
+  toggleProfanity = () => {
+    console.log("profanity");
+    this.profanity = false;
   }
 }

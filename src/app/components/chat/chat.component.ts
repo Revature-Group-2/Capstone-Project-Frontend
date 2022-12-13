@@ -61,13 +61,6 @@ export class ChatComponent implements OnInit{
     //this.stompClient.subscribe('/user/' + this.userData.username + '/private', this.onPrivateMessage);
   }
 
-  userJoin = () => {
-    let chatMessage = {
-      senderName: this.userData.username,
-      status:"JOIN",
-    };
-    this.stompClient.send("/app/message", {}, JSON.stringify(chatMessage));
-  }
 
   onMessageReceived = (payload: any) => {
     let payloadData = JSON.parse(payload.body);
