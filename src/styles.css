@@ -129,6 +129,10 @@ body {
     margin-top: 4em;
 }
 
+#no-resize {
+  resize: none;
+}
+
 .user-circle {
   width: 10em;
   height: 10em;
@@ -154,7 +158,6 @@ body {
 }
 
 .post-feed-container {
-  width: 80%;
   margin-top: 1em;
 }
 

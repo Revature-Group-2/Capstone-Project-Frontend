@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
+import { RouterTestingModule } from '@angular/router/testing';
 import { defer, Observable } from 'rxjs';
 import Post from 'src/app/models/Post';
 import User from 'src/app/models/User';
@@ -44,7 +45,7 @@ describe('PostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ MatCardModule],
+      imports: [ MatCardModule, RouterTestingModule],
       declarations: [ PostComponent, MockVoteButtonComponent, MockPosteDeleteButtonComponent ],
       providers:[
         {provide: PostService, useValue: postServiceStub},
