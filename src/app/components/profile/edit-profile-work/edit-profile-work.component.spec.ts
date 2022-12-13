@@ -37,7 +37,9 @@ describe('EditProfileWorkComponent', () => {
           firstName: '',
           lastName: '',
           avatarImageUrl: ''
-        }
+        },
+        subscriptionIds: [],
+        photoUrls: []
       }
 
       return defer(() => Promise.resolve(profile));

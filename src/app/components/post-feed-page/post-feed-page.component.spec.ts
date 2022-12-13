@@ -35,7 +35,7 @@ describe('PostFeedPageComponent', () => {
   let authServiceStub: Partial<AuthService>;
 
   postServiceStub = {
-    getAllPosts(): Observable<Post[]> {
+    getAllSubscribedPosts(): Observable<Post[]> {
       let posts: Post[] = [];
       return defer(()=>Promise.resolve(posts));
     },

@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { defer } from 'rxjs';
+import { Profile } from 'src/app/models/Profile';
+import { ProfileService } from 'src/app/services/profile.service';
+import { SearchService } from 'src/app/services/search.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SearchPageComponent } from './search-page.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-user-card',
@@ -28,10 +34,28 @@ class MockNavbar {}
 describe('SearchPageComponent', () => {
   let component: SearchPageComponent;
   let fixture: ComponentFixture<SearchPageComponent>;
+  let searchServiceStub: Partial<SearchService>;
+  let profileServiceStub: Partial<ProfileService>;
+
+
+  searchServiceStub = {
+    getProfiles(limitProfiles: number) {
+      let profiles: Profile[] = []
+      return defer(()=>Promise.resolve(profiles));
+    }
+  }
+
+  profileServiceStub = {
+    getOwnProfile() {
+      let profile: Profile = new Profile();
+      return defer(()=>Promise.resolve(profile));
+    }
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ MatIconModule, MatFormFieldModule, BrowserAnimationsModule, MatInputModule],
+      imports: [ MatIconModule, MatFormFieldModule, BrowserAnimationsModule, 
+        ReactiveFormsModule, MatInputModule, HttpClientTestingModule],
       declarations: [ SearchPageComponent, MockSearchUserCard, MockNavbar, MockSearchUserSidebar]
     })
     .compileComponents();

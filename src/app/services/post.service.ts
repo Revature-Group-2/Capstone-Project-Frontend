@@ -36,4 +36,8 @@ export class PostService {
   deletePost(id: number): Observable<Post> {
     return this.http.delete<Post>(`${this.postUrl}/${id}`, {headers: environment.headers, withCredentials: environment.withCredentials})
   }
+
+  getAllSubscribedPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.postUrl}/subscribed`, {headers: environment.headers, withCredentials: environment.withCredentials})
+  }
 }

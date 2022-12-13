@@ -30,15 +30,18 @@ export class ProfilePageComponent implements OnDestroy {
 
   inputPosts!: Post[];
   posts!: Post[];
-  updatePosts(posts: Post[]) {
-    this.posts = posts;
-  }
+  updatePosts(posts: Post[]) { this.posts = posts;}
 
   user!: User;
 
   profileHeroBanner: ProfileHeroBanner = new ProfileHeroBanner();
   profilePersonalInfo: ProfilePersonalInfo = new ProfilePersonalInfo();
+  followersIds: number[] = [];
+  profileId: number;
+
   isProfileToDisplay: boolean;
+
+  photoUrls: string[] = [];
   
 
   constructor(private authService: AuthService, private postService: PostService, public router: Router, private profileService: ProfileService,
@@ -65,6 +68,14 @@ export class ProfilePageComponent implements OnDestroy {
             this.manageProfileHeroBanner(profile);
             this.manageProfilePersonalInfo(profile);
             
+
+            this.followersIds = profile.subscriptionIds ?? [];
+            
+            this.profileId = profile.owner.id;
+
+            const photos =  profile.photoUrls ?? [];
+            this.photoUrls = (photos.length > 6) ? photos.slice(0, 6) : photos;
+
             this.postService.userPosts(profile.owner.id).subscribe( posts => { 
               this.posts = posts.reverse() 
             })
@@ -79,6 +90,11 @@ export class ProfilePageComponent implements OnDestroy {
           this.isEditable = true;
           this.manageProfileHeroBanner(profile);
           this.manageProfilePersonalInfo(profile);
+
+          this.followersIds = profile.subscriptionIds ?? [];
+
+          const photos =  profile.photoUrls ?? [];
+          this.photoUrls = (photos.length > 6) ? photos.slice(0, 6) : photos;
         })
 
         /* Restored session and takes userPosts */
@@ -86,9 +102,7 @@ export class ProfilePageComponent implements OnDestroy {
           this.user = user;
     
           this.postService.userPosts(this.user.id).subscribe( posts => { 
-
             this.posts = posts
-
             this.inputPosts = posts.reverse();
           })
         })

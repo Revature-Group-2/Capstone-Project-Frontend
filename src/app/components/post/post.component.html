@@ -23,7 +23,10 @@
             
         </mat-card-content>
 
-        <img mat-card-image *ngIf="post.imageUrl" src="{{ post.imageUrl }}" alt="Post Image">
+        <img mat-card-image *ngIf="post.imageUrl" src="{{ post.imageUrl }}" alt="Post Image"
+            [ngStyle]="{'margin': '0'}"
+        >
+        
         <div *ngFor="let comment of post.comments" class="comment-container">
             <mat-divider></mat-divider>
             <app-comment [comment]="comment"></app-comment>
