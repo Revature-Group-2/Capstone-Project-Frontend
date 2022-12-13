@@ -24,13 +24,13 @@
             </li>
         </ul>
     </div>
-    <div class="h-full w-5/6 mx-3 bg-white relative p-2">
-        <div class="">
+    <div class="h-full w-5/6 mx-3 bg-white relative p-2 flex-col">
+        <div class="max-h-[90%] overflow-scroll">
             <ul class="chat-messages">
                 <li *ngFor="let message of chats[tab]">{{ message.senderName }}: {{ message.message }}</li>
             </ul>
         </div>
-        <div class="absolute bottom-2 flex w-full">
+        <div class="absolute bottom-2 flex left-2 right-2">
             <input type="text" className="text-input" class="flex-grow shrink min-w-0 border-[#e5e7eb] border border-r-0 outline-none pl-2" placeholder="Type your message here"
                 [value]="userData.message" (input)="handleMessage($event)" (keypress)="onMessageEnter($event)">
             <button type="button" id="send-button" class=" text-white  bg-[#3f51b5] p-0.5 border border-black rounded-sm" (click)="sendValue()">Send</button>
