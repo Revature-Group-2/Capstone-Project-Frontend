@@ -95,7 +95,6 @@ export class ChatComponent implements OnInit{
   handleMessage = (event: any) => {
     const {value} = event.target;
     this.userData.message = value;
-    console.log(this.userData.message);
   }
 
   sendValue = () => {
@@ -113,8 +112,14 @@ export class ChatComponent implements OnInit{
   }
 
   createRoom = () => {
+    if (this.roomName === "" || this.rooms.includes(this.roomName)) {
+      return;
+    }
     this.stompClient.subscribe(`/chatroom/${this.roomName}`, this.onMessageReceived);
     this.tab = this.roomName;
+    if (!this.chats[this.tab]) {
+      this.chats[this.tab] = [];
+    }
     this.roomName = "";
     this.http.get(environment.baseUrl + "/chatrooms").subscribe((response) => {
       this.rooms = response;
@@ -137,11 +142,29 @@ export class ChatComponent implements OnInit{
     let roomName = event.target.value;
     this.stompClient.subscribe(`/chatroom/${roomName}`, this.onMessageReceived);
     this.tab = roomName;
+    if (!this.chats[this.tab]) {
+      this.chats[this.tab] = [];
+    }
   }
 
   changeTab = (event: any) => {
-    this.tab = event.target.textContent;
-    console.log(this.tab);
+    let roomName = event.target.textContent.trim().split(' ')[0];
+    if (this.chats[roomName] !== undefined) {
+      this.tab = roomName;
+    }
   }
 
+  onRoomEnter = (event: any) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("create-button")?.click();
+    }
+  }
+
+  onMessageEnter = (event: any) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("send-button")?.click();
+    }
+  }
 }
