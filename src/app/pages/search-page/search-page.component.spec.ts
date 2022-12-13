@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SearchPageComponent } from './search-page.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-user-card',
@@ -52,7 +54,8 @@ describe('SearchPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ MatIconModule, MatFormFieldModule, BrowserAnimationsModule, MatInputModule],
+      imports: [ MatIconModule, MatFormFieldModule, BrowserAnimationsModule, 
+        ReactiveFormsModule, MatInputModule, HttpClientTestingModule],
       declarations: [ SearchPageComponent, MockSearchUserCard, MockNavbar, MockSearchUserSidebar]
     })
     .compileComponents();

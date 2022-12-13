@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterTestingModule } from '@angular/router/testing';
 import { defer } from 'rxjs';
 import { Profile } from 'src/app/models/Profile';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -20,6 +22,7 @@ describe('ProfileFollowingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ RouterTestingModule, MatIconModule ],
       declarations: [ ProfileFollowingComponent ],
       providers: [
         {provide: ProfileService, useValue: profileServiceStub}

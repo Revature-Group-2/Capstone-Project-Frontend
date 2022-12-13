@@ -33,7 +33,7 @@ export class ProfileFollowingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.clearSubscription.unsubscribe();
+    //this.clearSubscription.unsubscribe();
   }
 
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,11 +13,11 @@ export class SubscriptionService {
 
   constructor(private http: HttpClient) { }
 
-  public subscribeProfile(id: number) {
+  public subscribeProfile(id: number): Observable<any> {
     return this.http.patch(this.url, { id }, this.headers);
   }
 
-  public unsubscribeProfile(id: number) {
+  public unsubscribeProfile(id: number): Observable<any> {
     return this.http.patch(`${this.url}/unsubscribe`, { id }, this.headers)
   }
 }
