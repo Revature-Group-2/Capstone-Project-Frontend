@@ -1,6 +1,15 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FriendsPageComponent } from './friends-page.component';
+
+@Component({
+  selector: 'app-navbar',
+  template: ''
+})
+class MockNavbar{
+
+}
 
 describe('FriendsPageComponent', () => {
   let component: FriendsPageComponent;
@@ -8,7 +17,7 @@ describe('FriendsPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FriendsPageComponent ]
+      declarations: [ FriendsPageComponent, MockNavbar ]
     })
     .compileComponents();
 

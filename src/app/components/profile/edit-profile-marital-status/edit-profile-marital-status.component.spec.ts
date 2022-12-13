@@ -1,4 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { defer, Observable } from 'rxjs';
 import { IProfileMaritalStatus } from 'src/app/models/Profile';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -22,6 +27,7 @@ describe('EditProfileMaritalStatusComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ MatFormFieldModule, MatSelectModule, BrowserAnimationsModule, ReactiveFormsModule ],
       declarations: [ EditProfileMaritalStatusComponent ],
       providers: [
         { provide: ProfileService, useValue: profileServiceStub }

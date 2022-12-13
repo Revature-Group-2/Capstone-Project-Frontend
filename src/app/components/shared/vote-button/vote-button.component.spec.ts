@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { defer, Observable } from 'rxjs';
 import Post from 'src/app/models/Post';
 import User from 'src/app/models/User';
@@ -8,6 +9,7 @@ import { PostService } from 'src/app/services/post.service';
 import { VoteService } from 'src/app/services/vote.service';
 
 import { VoteButtonComponent } from './vote-button.component';
+import { VoteType } from './vote-type';
 
 describe('VoteButtonComponent', () => {
   let component: VoteButtonComponent;
@@ -17,7 +19,8 @@ describe('VoteButtonComponent', () => {
   let postServiceStub: Partial<PostService>;
   let user = new User(0,"","","");
   let post = new Post(0,"","",0,user,[]);
-  voteServiceSpy = jasmine.createSpyObj('VoteService', ['vote'])
+  let vote = new Vote(0,VoteType.UPVOTE, post, user);
+  voteServiceSpy = jasmine.createSpyObj('VoteService', ['vote', 'checkVote'])
 
   authServiceStub = {
     currentUser: user
@@ -30,7 +33,13 @@ describe('VoteButtonComponent', () => {
   }
 
   beforeEach(async () => {
+    let value: Observable<any> = defer(()=>Promise.resolve(true))
+    voteServiceSpy.vote.and.returnValue(value);
+    let value2: Observable<Vote> = defer(()=>Promise.resolve(vote))
+    voteServiceSpy.checkVote.and.returnValue(value2);
+
     await TestBed.configureTestingModule({
+      imports: [ MatIconModule ],
       declarations: [ VoteButtonComponent ],
       providers: [
         {provide: VoteService, useValue: voteServiceSpy},
@@ -44,6 +53,7 @@ describe('VoteButtonComponent', () => {
     component = fixture.componentInstance;
     component.post = post;
     fixture.detectChanges();
+
   });
 
   it('should create', () => {
@@ -51,15 +61,11 @@ describe('VoteButtonComponent', () => {
   });
 
   it('should call voteService vote on upvote',()=>{
-    let value: Observable<any> = defer(()=>Promise.resolve(true))
-    voteServiceSpy.vote.and.returnValue(value);
     component.upvotePost();
     expect(voteServiceSpy.vote).toHaveBeenCalled();
   });
 
   it('should call voteService vote on downvote',()=>{
-    let value: Observable<any> = defer(()=>Promise.resolve(true))
-    voteServiceSpy.vote.and.returnValue(value);
     component.downvotePost();
     expect(voteServiceSpy.vote).toHaveBeenCalled();
   });
