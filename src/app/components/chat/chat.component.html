@@ -1,7 +1,9 @@
-<app-navbar></app-navbar>
-<div className="container">
-    <div class="flex flex-row bg-white" *ngIf="userData.connected">
-        <div class="float-left">
+<span class="fixed w-screen z-30">
+    <app-navbar></app-navbar>
+</span>
+<div class="flex h-screen w-screen">
+    <div class="flex flex-row h-full w-full mt-5 items-center" *ngIf="userData.connected">
+        <div class="h-4/5 w-1/6 mx-3 bg-white">
             <input type="text" classname="input-room" placeholder="Type room name" [value]="roomName"
                 (change)="handleRoom($event)">
             <button type="button" class="create-button" (click)="createRoom()">Create</button>
@@ -13,8 +15,8 @@
                 </li>
             </ul>
         </div>
-        <div class="float-right">
-            <div class="float-right">
+        <div class="h-4/5 w-5/6 mx-3 bg-white">
+            <div class="">
                 <ul class="chat-messages">
                     <li *ngFor="let message of chats[tab]">{{ message.senderName }}: {{ message.message }}</li>
                 </ul>
