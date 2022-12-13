@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { Profile } from 'src/app/models/Profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { SubscriptionService } from 'src/app/services/subscription.service';
 
@@ -17,8 +19,21 @@ describe('FollowingsPageComponent', () => {
   let fixture: ComponentFixture<FollowingsPageComponent>;
   let profileServiceStub: Partial<ProfileService>;
   let subscriptionServiceStub: Partial<SubscriptionService>;
+  let profile = new Profile();
+  //profile.owner.avatarImageUrl = ''
+  let profiles = [profile];
 
-  profileServiceStub = {}
+  profileServiceStub = {
+    getOwnProfile(){
+      return of(profile);
+    },
+    getProfile(id: number){
+      return of(profile);
+    },
+    getAllProfilesByIds(ids: number[]){
+      return of(profiles);
+    }
+  }
 
   subscriptionServiceStub = {}
 
@@ -39,4 +54,14 @@ describe('FollowingsPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+/*   it('should call getAllProfilesByIds in IdProvided', () => {
+    component.queryIdProvided(0);
+    expect(component.profiles).toEqual(profiles);
+  });
+
+  it('should call getAllProfilesByIds in IdProvided', () => {
+    component.queryIdNotProvided();
+    expect(component.profiles).toEqual(profiles);
+  }); */
 });

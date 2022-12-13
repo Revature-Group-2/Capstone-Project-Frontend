@@ -32,10 +32,6 @@ export class FollowingsPageComponent implements OnInit {
         })
   }
 
-  ngOnChanges(change: SimpleChange) {
-    console.log(this.profiles)
-  }
-
   queryIdProvided(id: number) {
     this.profileService.getProfile(id).subscribe((profile : IProfile) => {
       this.profileService.getAllProfilesByIds(profile.subscriptionIds).subscribe( (profiles : IProfile[]) => {
