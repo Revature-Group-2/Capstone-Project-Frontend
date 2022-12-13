@@ -16,7 +16,7 @@
                 <mat-label>Add an Image?</mat-label>
                 <input matInput formControlName="imageUrl">
             </mat-form-field>
-            <div *ngIf="this.profanity">
+            <div *ngIf="profanity" (click)="toggleProfanity()" class="text-red-600">
                 No profanity!
             </div>
             <div align="end">
