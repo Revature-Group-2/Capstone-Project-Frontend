@@ -1,5 +1,5 @@
 import { AuthService } from 'src/app/services/auth.service';
-import { Subscription } from 'rxjs';
+import { delay, Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit{
-
+  isLoading = false;
   chats : any = {
     public: [],
   };
@@ -126,8 +126,14 @@ export class ChatComponent implements OnInit{
   }
 
   reloadRooms = () => {
-    this.http.get(environment.baseUrl + "/chatrooms").subscribe((response) => {
-      this.rooms = response;
+    this.isLoading = true;
+    this.http.get(environment.baseUrl + "/chatrooms").pipe(delay(950)).subscribe({
+      next: (response) => {
+        this.rooms = response;
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
     })
   }
 
