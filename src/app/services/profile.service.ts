@@ -88,4 +88,12 @@ export class ProfileService {
     return this.http.get<IProfile[]>(`${this.profileUrl}/all`, { ...this.headers, params})
   }
 
+  updatePhotos(url: string) {
+    return this.http.put<IProfile>(`${this.profileUrl}/update-photos`, { url }, this.headers);
+  }
+
+  removePhoto(url: string) {
+    return this.http.patch<IProfile>(`${this.profileUrl}/update-photos`, {url}, this.headers);
+  }
+
 }

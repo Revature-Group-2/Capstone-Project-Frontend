@@ -38,6 +38,8 @@ import { SearchUserCardComponent } from './components/search-user-card/search-us
 import { SearchUserSidebarComponent } from './components/search-user-sidebar/search-user-sidebar.component';
 import { ProfileFollowingComponent } from './components/profile/profile-following/profile-following.component';
 import { FollowingsPageComponent } from './pages/followings-page/followings-page.component';
+import { PhotosPageComponent } from './pages/photos-page/photos-page.component';
+import { PhotosPageImagesComponent } from './components/photos/photos-page-images/photos-page-images.component';
 
 
 @NgModule({
@@ -71,7 +73,9 @@ import { FollowingsPageComponent } from './pages/followings-page/followings-page
     SearchUserCardComponent,
     SearchUserSidebarComponent,
     ProfileFollowingComponent,
-    FollowingsPageComponent
+    FollowingsPageComponent,
+    PhotosPageComponent,
+    PhotosPageImagesComponent
   ],
   imports: [
     BrowserModule,

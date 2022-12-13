@@ -66,6 +66,7 @@ export interface IProfile {
     phoneNumber: string
 
     subscriptionIds: number[];
+    photoUrls: string[];
     owner: IUser
 }
 
@@ -86,6 +87,8 @@ export class Profile implements IProfile {
     phoneNumber: string
     subscriptionIds: number[];
     owner: IUser
+    photoUrls: string[]
+
 
     constructor()
     constructor(profile?: IProfile) {
@@ -104,6 +107,7 @@ export class Profile implements IProfile {
         this.companyUrl = profile?.companyUrl! && ''
         this.phoneNumber = profile?.phoneNumber! && ''
         this.subscriptionIds = profile?.subscriptionIds! && []
+        this.photoUrls = profile?.photoUrls! && []
         this.owner = profile?.owner! && {
             id: 0,
             email: '',

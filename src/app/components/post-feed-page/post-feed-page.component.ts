@@ -25,7 +25,7 @@ export class PostFeedPageComponent implements OnInit {
   constructor(private postService: PostService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.postService.getAllPosts().subscribe(
+    this.postService.getAllSubscribedPosts().subscribe(
       (response) => {
         this.posts = response
       }

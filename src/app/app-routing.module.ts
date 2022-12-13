@@ -5,6 +5,7 @@ import { PostFeedPageComponent } from './components/post-feed-page/post-feed-pag
 import { RegisterComponent } from './components/register/register.component';
 import { FollowingsPageComponent } from './pages/followings-page/followings-page.component';
 import { FourOFourPageComponent } from './pages/four-o-four-page/four-o-four-page.component';
+import { PhotosPageComponent } from './pages/photos-page/photos-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent },
   { path: "post-feed", component: PostFeedPageComponent},
   { path: "followings", component: FollowingsPageComponent },
+  { path: "photos", component: PhotosPageComponent },
   { path: "profile", component: ProfilePageComponent },
   { path: "search", component: SearchPageComponent },
   { path: "404", component: FourOFourPageComponent }

@@ -11,8 +11,6 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class ProfileFollowingComponent implements OnInit, OnDestroy {
 
-  static num: number = 0;
-
   clearSubscription: Subscription;
 
   @Input()
@@ -26,7 +24,6 @@ export class ProfileFollowingComponent implements OnInit, OnDestroy {
 
   /* Runs every time when new data comes to the component */
   ngOnChanges() {
-    console.log("Rendered " + (ProfileFollowingComponent.num++))
     if (!(this.followersIds.length == 0)) {
 
       this.clearSubscription = this.profileService.getAllProfilesByIds(this.followersIds, 6, true).subscribe((response : IProfile[]) => {
