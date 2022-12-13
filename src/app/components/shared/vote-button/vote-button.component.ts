@@ -77,12 +77,12 @@ export class VoteButtonComponent implements OnInit {
         this.upVote = false
       }
 
-      if (data.voteType.toString()==="DOWNVOTE") {
+      else if (data.voteType.toString()==="DOWNVOTE") {
         this.downVote = true
         this.upVote = false
       }
 
-      if (data.voteType.toString()==="UPVOTE") {
+      else if (data.voteType.toString()==="UPVOTE") {
         this.downVote = false
         this.upVote = true
       }
