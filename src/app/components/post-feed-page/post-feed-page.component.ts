@@ -46,7 +46,6 @@ export class PostFeedPageComponent implements OnInit {
         }, 
         error: error => {
           if (error.error === "profanity") {
-            console.log('hello');
             this.profanity = true;
           }
         },

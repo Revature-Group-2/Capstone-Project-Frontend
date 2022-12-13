@@ -33,6 +33,7 @@ import { EditProfileWorkComponent } from './components/profile/edit-profile-work
 import { EditProfileMaritalStatusComponent } from './components/profile/edit-profile-marital-status/edit-profile-marital-status.component';
 import { PostCreateComponent } from './components/post-create/post-create.component';
 import { PostDeleteButtonComponent } from './components/shared/post-delete-button/post-delete-button.component';
+import { ChatComponent } from './components/chat/chat.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { SearchUserCardComponent } from './components/search-user-card/search-user-card.component';
 import { SearchUserSidebarComponent } from './components/search-user-sidebar/search-user-sidebar.component';
@@ -63,6 +64,7 @@ import { PhotosPageImagesComponent } from './components/photos/photos-page-image
     EditProfileGeneralInfoComponent,
     OnlyNumbersDirective,
     VoteButtonComponent,
+    ChatComponent,
     EditProfileLocationComponent,
     EditProfileEducationComponent,
     EditProfileWorkComponent,

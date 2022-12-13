@@ -1,11 +1,31 @@
+import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
+import { RouterTestingModule } from '@angular/router/testing';
 import { defer, Observable } from 'rxjs';
 import Post from 'src/app/models/Post';
 import User from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
+import { VoteButtonComponent } from '../shared/vote-button/vote-button.component';
 
 import { PostComponent } from './post.component';
+
+@Component({
+  selector: 'app-vote-button',
+  template: ''
+})
+class MockVoteButtonComponent{
+  @Input('post') post: Post;
+}
+
+@Component({
+  selector: 'app-post-delete-button',
+  template: ''
+})
+class MockPosteDeleteButtonComponent{
+  @Input('post') post: Post;
+}
 
 describe('PostComponent', () => {
   let component: PostComponent;
@@ -25,7 +45,8 @@ describe('PostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PostComponent ],
+      imports: [ MatCardModule, RouterTestingModule],
+      declarations: [ PostComponent, MockVoteButtonComponent, MockPosteDeleteButtonComponent ],
       providers:[
         {provide: PostService, useValue: postServiceStub},
         {provide: AuthService, useValue: authServiceStub}

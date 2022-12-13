@@ -1,4 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDivider, MatDividerModule } from '@angular/material/divider';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { defer, Observable } from 'rxjs';
 import { IProfileLocation } from 'src/app/models/Profile';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -27,6 +32,8 @@ describe('EditProfileLocationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ ReactiveFormsModule, MatFormFieldModule, MatDividerModule,
+        MatInputModule, BrowserAnimationsModule],
       declarations: [ EditProfileLocationComponent ],
       providers: [
         {provide: ProfileService, useValue: profileServiceStub}

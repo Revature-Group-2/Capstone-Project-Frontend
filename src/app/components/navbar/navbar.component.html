@@ -8,8 +8,7 @@
                 <img class="w-10" src="assets/images/favicon-tab.png" alt="Logo">
                 <span class="text-shadow text-blue-800">Social Sources</span>
             </span>
-            <div class="flex items-center"
-            >
+            <div class="flex items-center">
                 <a 
                     routerLink="/post-feed"
                     [ngClass]="{
@@ -29,6 +28,15 @@
                     class="flex items-center ml-12"
                 >
                     <mat-icon [color]="router.url === '/profile' ? 'primary' : ''">account_circle</mat-icon>
+                </a>
+                <a 
+                    routerLink="/chat"
+                    [ngClass]="{
+                        'active-icon relative' : router.url === '/chat'
+                    }" 
+                    class="flex items-center ml-12"
+                >
+                    <mat-icon [color]="router.url === '/chat' ? 'primary' : ''">chat_bubble_outline</mat-icon>
                 </a>
 
                 <a 

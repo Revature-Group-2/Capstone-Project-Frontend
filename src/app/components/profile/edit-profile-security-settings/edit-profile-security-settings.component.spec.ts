@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { defer, Observable } from 'rxjs';
 import { IChangePassword } from 'src/app/models/Profile';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -21,6 +25,7 @@ describe('EditProfileSecuritySettingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ MatFormFieldModule, MatInputModule, ReactiveFormsModule, BrowserAnimationsModule],
       declarations: [ EditProfileSecuritySettingsComponent ],
       providers: [{provide: ProfileService, useValue: profileServiceStub}]
     })
