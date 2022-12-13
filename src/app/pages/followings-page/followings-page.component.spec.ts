@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FriendsPageComponent } from './friends-page.component';
+import { FollowingsPageComponent } from './followings-page.component';
 
-describe('FriendsPageComponent', () => {
-  let component: FriendsPageComponent;
-  let fixture: ComponentFixture<FriendsPageComponent>;
+describe('FollowingsPageComponent', () => {
+  let component: FollowingsPageComponent;
+  let fixture: ComponentFixture<FollowingsPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FriendsPageComponent ]
+      declarations: [ FollowingsPageComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FriendsPageComponent);
+    fixture = TestBed.createComponent(FollowingsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

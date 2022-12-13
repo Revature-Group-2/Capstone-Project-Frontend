@@ -16,7 +16,6 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserInitialsPipe } from './pipes/user-initials.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
-import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { ProfilePersonalInformationComponent } from './components/profile/profile-personal-information/profile-personal-information.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -37,6 +36,8 @@ import { PostDeleteButtonComponent } from './components/shared/post-delete-butto
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { SearchUserCardComponent } from './components/search-user-card/search-user-card.component';
 import { SearchUserSidebarComponent } from './components/search-user-sidebar/search-user-sidebar.component';
+import { ProfileFollowingComponent } from './components/profile/profile-following/profile-following.component';
+import { FollowingsPageComponent } from './pages/followings-page/followings-page.component';
 
 
 @NgModule({
@@ -50,7 +51,6 @@ import { SearchUserSidebarComponent } from './components/search-user-sidebar/sea
     UserCardComponent,
     NavbarComponent,
     UserInitialsPipe,
-    FriendsPageComponent,
     ProfilePageComponent,
     ProfilePersonalInformationComponent,
     EditProfileComponent,
@@ -69,7 +69,9 @@ import { SearchUserSidebarComponent } from './components/search-user-sidebar/sea
     PostDeleteButtonComponent,
     SearchPageComponent,
     SearchUserCardComponent,
-    SearchUserSidebarComponent
+    SearchUserSidebarComponent,
+    ProfileFollowingComponent,
+    FollowingsPageComponent
   ],
   imports: [
     BrowserModule,

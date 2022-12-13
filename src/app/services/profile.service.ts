@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -77,6 +77,15 @@ export class ProfileService {
 
   updateProfileAvatar(url: string): Observable<IProfile> {
     return this.http.post<IProfile>(`${this.profileUrl}/profile-avatar`, {url}, this.headers);
+  }
+
+  getAllProfilesByIds(profilesIds: number[], limit?: number, shuffle?: boolean): Observable<IProfile[]> {
+  
+    let params = new HttpParams().set('ids', profilesIds.sort().join(','))
+                                 .set('limit', limit ?? -1)
+                                 .set('shuffle', shuffle ?? false);
+
+    return this.http.get<IProfile[]>(`${this.profileUrl}/all`, { ...this.headers, params})
   }
 
 }

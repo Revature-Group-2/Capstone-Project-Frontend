@@ -1,5 +1,8 @@
-<app-navbar></app-navbar>
-<div class="mx-5 lg:mx-7 xl:mx-20">
+<span class="fixed w-screen z-30">
+    <app-navbar></app-navbar>
+</span>
+
+<div class="pt-20 mx-5 lg:mx-7 xl:mx-20">
 
     <app-profile-hero-banner 
         [isEditable]="isEditable" 
@@ -26,41 +29,12 @@
 
             <!-- List of Friends-->
             <div class="py-4 bg-white box-shadow"
+                *ngIf="followersIds.length != 0"
                 [ngClass]="{
                     'mt-4' : !isProfileToDisplay || isEditable
                 }"
             >
-                <h4 class="px-4 flex items-center justify-between">
-                    <span class="flex items-center">
-                        <mat-icon>group</mat-icon>
-                        <span class="ml-2 text-base font-semibold">
-                            Following 
-                        </span>
-                    </span>
-                    <a class="text-blue-600 underline">All 64 followings</a>
-                </h4>
-
-                <ul class="grid grid-cols-3 grid-rows-2 gap-x-1.5 gap-y-1 px-1">
-                    <li>
-                        <img class="w-full h-full object-cover" src="https://th.bing.com/th/id/OIP.dRxYDV441prSjH3e4upzwgHaE8?pid=ImgDet&rs=1">
-                    </li>
-                    <li>
-                        <img class="w-full h-full overflow-hidden object-cover" src="https://th.bing.com/th/id/OIP.M4s8U7VAp2Z5VzVVpzMujAHaFj?w=231&h=180&c=7&r=0&o=5&pid=1.7">
-                    </li>
-                    <li>
-                        <img class="w-full h-full overflow-hidden object-cover" src="https://th.bing.com/th/id/OIP.hwwFETHzhbdKpOeK0nLNxwHaE8?pid=ImgDet&rs=1">
-                    </li>
-                    <li>
-                        <img class="w-full h-full overflow-hidden object-cover" src="https://th.bing.com/th/id/OIP.S-jEU0Shax-51b1K5JMUPwHaEK?pid=ImgDet&rs=1">
-                    </li>
-                    <li>
-                        <img class="w-full h-full overflow-hidden object-cover" src="https://th.bing.com/th/id/OIP.J8c2WZPovxYc0O65WXEYHgHaD4?pid=ImgDet&rs=1">
-                    </li>
-                    <li>
-                        <img class="w-full h-full overflow-hidden object-cover" src="https://th.bing.com/th/id/OIP.B7HEsxCp6l__fGZeekFcugHaE1?pid=ImgDet&rs=1">
-                    </li>
-
-                </ul>
+                <app-profile-following [followersIds]="followersIds"></app-profile-following>
             </div>
 
             <div class="mt-4 py-4 bg-white box-shadow">

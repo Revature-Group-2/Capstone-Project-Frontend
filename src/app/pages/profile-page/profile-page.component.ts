@@ -38,6 +38,8 @@ export class ProfilePageComponent implements OnDestroy {
 
   profileHeroBanner: ProfileHeroBanner = new ProfileHeroBanner();
   profilePersonalInfo: ProfilePersonalInfo = new ProfilePersonalInfo();
+  followersIds: number[] = [];
+
   isProfileToDisplay: boolean;
   
 
@@ -65,6 +67,9 @@ export class ProfilePageComponent implements OnDestroy {
             this.manageProfileHeroBanner(profile);
             this.manageProfilePersonalInfo(profile);
             
+
+            this.followersIds = profile.subscriptionIds ?? [];
+            
             this.postService.userPosts(profile.owner.id).subscribe( posts => { 
               this.posts = posts.reverse() 
             })
@@ -79,6 +84,8 @@ export class ProfilePageComponent implements OnDestroy {
           this.isEditable = true;
           this.manageProfileHeroBanner(profile);
           this.manageProfilePersonalInfo(profile);
+
+          this.followersIds = profile.subscriptionIds ?? [];
         })
 
         /* Restored session and takes userPosts */
