@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class SocketServiceService {
+export class SocketService {
 
   constructor() { }
 
@@ -15,5 +15,5 @@ export class SocketServiceService {
     return Stomp.over(socket);
   }
 
-  }
 }
+
