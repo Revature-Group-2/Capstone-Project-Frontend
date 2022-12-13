@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { defer } from 'rxjs';
+import { defer, of } from 'rxjs';
 import User from '../models/User';
 import { environment } from 'src/environments/environment';
 
@@ -21,7 +21,7 @@ describe('AuthService', () => {
   });
 
   it('should set currentUser on login', () => {
-    httpSpy.post.and.returnValue(defer(()=>Promise.resolve(user2)));
+    httpSpy.post.and.returnValue(of(user2));
     authService.login("","").subscribe((data)=>{  
       expect(authService.currentUser).toEqual(user2);
     });

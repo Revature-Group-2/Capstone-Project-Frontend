@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable, defer, throwError } from 'rxjs';
+import { Observable, defer, throwError, of } from 'rxjs';
 import Post from 'src/app/models/Post';
 import User from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,7 +17,7 @@ describe('CommentComponent', () => {
 
   postServiceStub = {
     upsertComment(post: Post): Observable<any>{
-      return defer(()=>Promise.resolve(post))
+      return of(post)
     }
   }
 
@@ -49,9 +49,7 @@ describe('CommentComponent', () => {
     let oldVal = component.replyToComment;
     let mock = {preventDefault(){}};
     component.submitReply(mock);
-    setTimeout(()=>{
-      expect(component.replyToComment).toEqual(!oldVal);
-    }, 2000);
+    expect(component.replyToComment).toEqual(!oldVal);
 
   });
 });
