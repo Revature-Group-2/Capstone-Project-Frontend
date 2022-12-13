@@ -60,8 +60,6 @@ export class VoteButtonComponent implements OnInit {
     this.voteService.vote(newVote).subscribe(() => {
       this.updateVoteDetails();
       this.checkVoteStatus();
-    }, error => {
-      throw(error);
     });
   }
 
@@ -77,19 +75,16 @@ export class VoteButtonComponent implements OnInit {
       if (!data) {
         this.downVote = false
         this.upVote = false
-        console.log(`No data for ${this.post.id}`)
       }
 
       if (data.voteType.toString()==="DOWNVOTE") {
         this.downVote = true
         this.upVote = false
-        console.log(`The status on post id: ${this.post.id} is DOWNVOTE and this.downvote is ${this.downVote}`)
       }
 
       if (data.voteType.toString()==="UPVOTE") {
         this.downVote = false
         this.upVote = true
-        console.log(`The status on post id: ${this.post.id} is UPVOTE and this.upVote is ${this.upVote}`)
       }
     })
   }
