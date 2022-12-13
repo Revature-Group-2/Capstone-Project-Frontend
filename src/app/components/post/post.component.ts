@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import Post from 'src/app/models/Post';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,6 +19,8 @@ export class PostComponent implements OnInit {
   @Input('post') post: Post
   replyToPost: boolean = false
   currentUser: User = this.authService.currentUser
+
+  @Output() postToRemove: EventEmitter<Post> = new EventEmitter();
 
   constructor(private postService: PostService, private authService: AuthService) { }
 

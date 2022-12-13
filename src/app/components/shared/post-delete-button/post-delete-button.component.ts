@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import Post from '../../../models/Post';
 import { PostService } from '../../../services/post.service';
 import { AuthService } from '../../../services/auth.service';
@@ -12,24 +12,33 @@ import User from '../../../models/User';
 })
 export class PostDeleteButtonComponent implements OnInit {
   @Input('post') post: Post;
+
+  @Output() postToRemove: EventEmitter<Post> = new EventEmitter();
+
   user: User = this.authService.currentUser
   
   constructor(
     private postService: PostService,
-    private authService: AuthService,
-    private postFeedPageComponent: PostFeedPageComponent
+    private authService: AuthService
+    // ,
+    // private postFeedPageComponent: PostFeedPageComponent
     ) { }
 
   ngOnInit(): void {
   }
 
   deletePost() {
-    this.postService.deletePost(this.post.id).subscribe(post => {
-      this.postService.getAllPosts().subscribe(
-        (response) => {
-          this.postFeedPageComponent.posts = response
-        }
-      )
+    this.postService.deletePost(this.post.id).subscribe({
+      next: () => {
+
+        this.postToRemove.next(this.post);
+
+      // this.postService.getAllPosts().subscribe(
+      //   (response) => {
+      //     this.postFeedPageComponent.posts = response
+      //   }
+      // )
+      }
     });
   }
 

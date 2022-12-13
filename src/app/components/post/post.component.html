@@ -33,7 +33,7 @@
         </div>
 
         <mat-card-actions align="end">
-            <app-post-delete-button [post]="post" *ngIf="post.author.id==currentUser.id"></app-post-delete-button>
+            <app-post-delete-button [post]="post" *ngIf="post.author.id==currentUser.id" (postToRemove)="postToRemove.next($event)"></app-post-delete-button>
             <button mat-raised-button color="primary" (click)="toggleReplyToPost()">Reply</button>
         </mat-card-actions>
 
