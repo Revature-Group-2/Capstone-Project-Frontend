@@ -52,7 +52,8 @@ export class ChatComponent implements OnInit{
   }
 
   connect = ()  => {
-    this.socketService.getSocket().connect({}, this.onConnected, this.onError);
+    this.stompClient = this.socketService.getSocket();
+    this.stompClient.connect({}, this.onConnected, this.onError);
   }
 
   onConnected = () => {
@@ -151,6 +152,7 @@ export class ChatComponent implements OnInit{
     if (this.chats[roomName] !== undefined) {
       this.tab = roomName;
     }
+    
   }
 
   onRoomEnter = (event: any) => {
