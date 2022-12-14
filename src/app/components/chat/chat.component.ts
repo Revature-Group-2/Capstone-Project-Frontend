@@ -6,6 +6,7 @@ import * as SockJS from 'sockjs-client';
 import { environment } from 'src/environments/environment';
 import { isNgTemplate } from '@angular/compiler';
 import { HttpClient } from '@angular/common/http';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-chat',
@@ -36,6 +37,7 @@ export class ChatComponent implements OnInit{
   constructor(
     private authService : AuthService,
     private http : HttpClient,
+    private socketService : SocketService
   ) {}
 
   ngOnInit() {
@@ -50,8 +52,7 @@ export class ChatComponent implements OnInit{
   }
 
   connect = ()  => {
-    const socket = new SockJS(environment.baseUrl + '/ws');
-    this.stompClient = Stomp.over(socket);
+    this.stompClient = this.socketService.getSocket();
     this.stompClient.connect({}, this.onConnected, this.onError);
   }
 
@@ -151,6 +152,7 @@ export class ChatComponent implements OnInit{
     if (this.chats[roomName] !== undefined) {
       this.tab = roomName;
     }
+    
   }
 
   onRoomEnter = (event: any) => {
