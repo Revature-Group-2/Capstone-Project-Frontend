@@ -23,9 +23,7 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let authServiceStub: Partial<AuthService>;
-  let routerStub: Partial<Router>;
-  let routerSpy: jasmine.SpyObj<Router>;
-  routerSpy = jasmine.createSpyObj('Router',['navigate']);
+  let router: Router;
 
   authServiceStub = {
     login(email: string, password: string): Observable<any> {
@@ -34,24 +32,19 @@ describe('LoginComponent', () => {
     } 
   }
 
-  routerStub = {
-    navigate(args: String[]): Promise<boolean> {
-      return Promise.resolve(true);
-    }
-  }
-
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ MatCardModule, MatFormFieldModule, MatInputModule, 
-        BrowserAnimationsModule, RouterTestingModule, ReactiveFormsModule ],
+        BrowserAnimationsModule, RouterTestingModule.withRoutes([]), ReactiveFormsModule ],
       declarations: [ LoginComponent, MockRouterLink ],
       providers: [
         {provide: AuthService, useValue: authServiceStub},
-        //{provide: Router, useValue: routerSpy}
       ]
     })
     .compileComponents();
+
+    router = TestBed.inject(Router);
   });
 
   beforeEach(() => {
@@ -64,19 +57,18 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-// TODO: make work with RouterTestingModule instead of RouterSpy
-/*   it('should navigate to post-feed on login', () => {
-    routerSpy.navigate.and.returnValue(Promise.resolve(true))
+  it('should navigate to post-feed on login', () => {
+    const navigateSpy = spyOn(router, 'navigate');
     let mock = {preventDefault(){}};
     component.onSubmit(mock);
     setTimeout(()=>{
-      expect(routerSpy.navigate).toHaveBeenCalled();
+      expect(navigateSpy).toHaveBeenCalledWith(['post-feed']);
     },2000);
-  });
+  }); 
 
   it('should navigate to register on calling register', () => {
-    routerSpy.navigate.and.returnValue(Promise.resolve(true))
+    const navigateSpy = spyOn(router, 'navigate');
     component.register();
-    expect(routerSpy.navigate).toHaveBeenCalled();
-  }); */
+    expect(navigateSpy).toHaveBeenCalledWith(['register']);
+  }); 
 });
