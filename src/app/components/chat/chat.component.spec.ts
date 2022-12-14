@@ -23,6 +23,7 @@ describe('ChatComponent', () => {
   let component: ChatComponent;
   let fixture: ComponentFixture<ChatComponent>;
   let httpSpy: jasmine.SpyObj<HttpClient>;
+  let httpSpy2: jasmine.SpyObj<HttpClient>;
   let user = new User(1,"email","first_name","last_name");
   let authSpy: jasmine.SpyObj<AuthService>;
   let socketServiceSpy: jasmine.SpyObj<SocketService>;
@@ -33,6 +34,8 @@ describe('ChatComponent', () => {
     authSpy = jasmine.createSpyObj('AuthService',['restoreSession']);
     authSpy.restoreSession.and.returnValue(of(user));
     httpSpy.get.and.returnValue(of(user));
+    httpSpy2 = jasmine.createSpyObj('HttpClient',['get']);
+    httpSpy2.get.and.returnValue(of(["public", "room1", "room2"]));
     socketServiceSpy = jasmine.createSpyObj('SocketService',['getSocket']);
     socketServiceSpy.getSocket.and.returnValue(Stomp.over(new WebSocket('ws://test.address')));
     await TestBed.configureTestingModule({
@@ -40,6 +43,7 @@ describe('ChatComponent', () => {
       providers: [
         {provide: AuthService, useValue: authSpy},
         {provide: HttpClient, useValue: httpSpy},
+        {provide: HttpClient, useValue: httpSpy2},
         {provide: SocketService, useValue: socketServiceSpy}
       ]
 
@@ -55,5 +59,33 @@ describe('ChatComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should handle room input', () => {
+    component.handleRoom({target: {value: "room"}});
+    expect(component.roomName).toEqual("room");
+  });
+
+  it('should handle message input', () => {
+    component.handleMessage({target: {value: "message"}});
+    expect(component.userData.message).toEqual("message");
+  })
+
+  it('should changed current viewing room', () => {
+    component.tab="room";
+    component.chats.room2 = [];
+    component.changeTab({target:{textContent:"room2 "}});
+    expect(component.tab).toEqual("room2");
+  })
+
+  it('should not change current viewing room if not subscribed', () => {
+    component.tab = "room";
+    component.chats = {};
+    component.changeTab({target:{textContent:"room2"}});
+    expect(component.tab).toEqual("room");
+  })
+
+  it('should reload list of rooms', () => {
+    component.reloadRooms();
+    expect(component.rooms).toEqual(["public", "room1", "room2"]);
+  })
   
 });
