@@ -57,7 +57,6 @@ export class PostCreateComponent {
   }
 
   toggleProfanity = () => {
-    console.log("profanity");
     this.profanity = false;
   }
 }
