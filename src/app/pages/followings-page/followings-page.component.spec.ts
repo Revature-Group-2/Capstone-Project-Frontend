@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { Profile } from 'src/app/models/Profile';
+import { IProfile, Profile } from 'src/app/models/Profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { SubscriptionService } from 'src/app/services/subscription.service';
 
@@ -21,7 +21,7 @@ describe('FollowingsPageComponent', () => {
   let subscriptionServiceStub: Partial<SubscriptionService>;
   let profile = new Profile();
   //profile.owner.avatarImageUrl = ''
-  let profiles = [profile];
+  let profiles:IProfile[] = [];
 
   profileServiceStub = {
     getOwnProfile(){
@@ -35,7 +35,11 @@ describe('FollowingsPageComponent', () => {
     }
   }
 
-  subscriptionServiceStub = {}
+  subscriptionServiceStub = {
+    unsubscribeProfile(ids: number){
+      return of(profile);
+    }
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -55,13 +59,24 @@ describe('FollowingsPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-/*   it('should call getAllProfilesByIds in IdProvided', () => {
+  it('should set isEditable false in IdProvided', () => {
+    component.isEditable = true;
     component.queryIdProvided(0);
-    expect(component.profiles).toEqual(profiles);
+    expect(component.isEditable).toEqual(false);
   });
 
-  it('should call getAllProfilesByIds in IdProvided', () => {
+  it('should set isEditable true in IdNotProvided', () => {
+    component.isEditable = false;
     component.queryIdNotProvided();
-    expect(component.profiles).toEqual(profiles);
-  }); */
+    expect(component.isEditable).toEqual(true);
+  });
+
+  it('should remove profiles on unsubscribe', () => {
+    let p0 = new Profile();
+    p0.id = 0;
+    component.profiles.push(p0)
+    component.onUnsubscribe(0);
+    expect(component.profiles).toEqual([]);
+  });
+
 });
