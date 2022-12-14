@@ -28,7 +28,7 @@
 
             <li *ngFor="let room of rooms" class="flex justify-between items-center ml-2 my-1 text-base w-full">
                 <div class="w-full" (click)="changeTab($event)" [ngStyle]="{'text-decoration': (tab===room) ? 'underline' : 'none'}">
-                    {{room}}
+                    {{ room }}
                 </div>
                 <button *ngIf="chats[room] === undefined" value="{{ room }}" (click)="joinRoom($event)" class="text-white text-shadow px-4 py-1 bg-green-400 rounded-md">
                     Join

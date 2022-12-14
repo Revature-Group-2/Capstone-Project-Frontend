@@ -125,7 +125,10 @@ export class ProfilePageComponent implements OnDestroy {
     this.manageProfilePersonalInfo(profile)
   }
 
-  
+  onPostRemove(e: any) {
+    console.log(e)
+    this.posts = this.posts.filter(post => post.id != e.id);
+  }
 
   openDialog() {
     this.dialog.open(EditProfileComponent, {

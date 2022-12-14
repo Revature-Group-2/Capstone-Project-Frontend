@@ -62,4 +62,9 @@ export class PostFeedPageComponent implements OnInit {
     console.log("profanity");
     this.profanity = false;
   }
+
+  onPostRemove(e: any) {
+    this.posts = this.posts.filter(post => post.id != e.id);
+  }
 }
+
