@@ -4,7 +4,7 @@ import { MatCard, MatCardHeader, MatCardModule, MatCardTitle } from '@angular/ma
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
-import { Observable, defer } from 'rxjs';
+import { Observable, defer, throwError, of } from 'rxjs';
 import User from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
@@ -28,7 +28,7 @@ describe('LoginComponent', () => {
   authServiceStub = {
     login(email: string, password: string): Observable<any> {
       let user = new User(0,"","","");
-      return defer(()=>Promise.resolve(user));
+      return of(user);
     } 
   }
 
@@ -57,18 +57,16 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  /*it('should navigate to post-feed on login', () => {
+  it('should navigate to post-feed on login', () => {
     const navigateSpy = spyOn(router, 'navigate');
     let mock = {preventDefault(){}};
     component.onSubmit(mock);
-    setTimeout(()=>{
-      expect(navigateSpy).toHaveBeenCalledWith(['post-feed']);
-    },2000);
+    expect(navigateSpy).toHaveBeenCalledWith(['post-feed']);
   }); 
 
   it('should navigate to register on calling register', () => {
     const navigateSpy = spyOn(router, 'navigate');
     component.register();
     expect(navigateSpy).toHaveBeenCalledWith(['register']);
-  }); */
+  }); 
 });
