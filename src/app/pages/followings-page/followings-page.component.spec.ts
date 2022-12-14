@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDividerModule } from '@angular/material/divider';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { IProfile, Profile } from 'src/app/models/Profile';
@@ -43,7 +44,7 @@ describe('FollowingsPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ RouterTestingModule ],
+      imports: [ RouterTestingModule, MatDividerModule ],
       declarations: [ FollowingsPageComponent, MockNavbar ],
       providers: [ { provide: ProfileService, useValue: profileServiceStub },
         { provide: SubscriptionService, useValue: subscriptionServiceStub } ]
@@ -69,14 +70,6 @@ describe('FollowingsPageComponent', () => {
     component.isEditable = false;
     component.queryIdNotProvided();
     expect(component.isEditable).toEqual(true);
-  });
-
-  it('should remove profiles on unsubscribe', () => {
-    let p0 = new Profile();
-    p0.id = 0;
-    component.profiles.push(p0)
-    component.onUnsubscribe(0);
-    expect(component.profiles).toEqual([]);
   });
 
 });
