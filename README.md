@@ -4,7 +4,7 @@ Written in Angular and TailwindCSS, using SockJS, and using Jasmine/Karma with J
 
 ## Requirements
 
-- Node 16.11
+- Node 16.10
 
 ## Functionality
 
