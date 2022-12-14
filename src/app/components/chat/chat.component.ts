@@ -1,11 +1,12 @@
 import { AuthService } from 'src/app/services/auth.service';
-import { Subscription } from 'rxjs';
+import { delay, Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { environment } from 'src/environments/environment';
 import { isNgTemplate } from '@angular/compiler';
 import { HttpClient } from '@angular/common/http';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-chat',
@@ -13,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit{
-
+  isLoading = false;
   chats : any = {
     public: [],
   };
@@ -36,6 +37,7 @@ export class ChatComponent implements OnInit{
   constructor(
     private authService : AuthService,
     private http : HttpClient,
+    private socketService : SocketService
   ) {}
 
   ngOnInit() {
@@ -50,8 +52,7 @@ export class ChatComponent implements OnInit{
   }
 
   connect = ()  => {
-    const socket = new SockJS(environment.baseUrl + '/ws');
-    this.stompClient = Stomp.over(socket);
+    this.stompClient = this.socketService.getSocket();
     this.stompClient.connect({}, this.onConnected, this.onError);
   }
 
@@ -61,13 +62,6 @@ export class ChatComponent implements OnInit{
     //this.stompClient.subscribe('/user/' + this.userData.username + '/private', this.onPrivateMessage);
   }
 
-  userJoin = () => {
-    let chatMessage = {
-      senderName: this.userData.username,
-      status:"JOIN",
-    };
-    this.stompClient.send("/app/message", {}, JSON.stringify(chatMessage));
-  }
 
   onMessageReceived = (payload: any) => {
     let payloadData = JSON.parse(payload.body);
@@ -95,7 +89,6 @@ export class ChatComponent implements OnInit{
   handleMessage = (event: any) => {
     const {value} = event.target;
     this.userData.message = value;
-    console.log(this.userData.message);
   }
 
   sendValue = () => {
@@ -113,8 +106,14 @@ export class ChatComponent implements OnInit{
   }
 
   createRoom = () => {
+    if (this.roomName === "" || this.rooms.includes(this.roomName)) {
+      return;
+    }
     this.stompClient.subscribe(`/chatroom/${this.roomName}`, this.onMessageReceived);
     this.tab = this.roomName;
+    if (!this.chats[this.tab]) {
+      this.chats[this.tab] = [];
+    }
     this.roomName = "";
     this.http.get(environment.baseUrl + "/chatrooms").subscribe((response) => {
       this.rooms = response;
@@ -128,8 +127,14 @@ export class ChatComponent implements OnInit{
   }
 
   reloadRooms = () => {
-    this.http.get(environment.baseUrl + "/chatrooms").subscribe((response) => {
-      this.rooms = response;
+    this.isLoading = true;
+    this.http.get(environment.baseUrl + "/chatrooms").pipe(delay(950)).subscribe({
+      next: (response) => {
+        this.rooms = response;
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
     })
   }
 
@@ -137,11 +142,30 @@ export class ChatComponent implements OnInit{
     let roomName = event.target.value;
     this.stompClient.subscribe(`/chatroom/${roomName}`, this.onMessageReceived);
     this.tab = roomName;
+    if (!this.chats[this.tab]) {
+      this.chats[this.tab] = [];
+    }
   }
 
   changeTab = (event: any) => {
-    this.tab = event.target.textContent;
-    console.log(this.tab);
+    let roomName = event.target.textContent.trim().split(' ')[0];
+    if (this.chats[roomName] !== undefined) {
+      this.tab = roomName;
+    }
+    
   }
 
+  onRoomEnter = (event: any) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("create-button")?.click();
+    }
+  }
+
+  onMessageEnter = (event: any) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("send-button")?.click();
+    }
+  }
 }

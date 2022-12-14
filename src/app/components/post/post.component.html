@@ -23,14 +23,17 @@
             
         </mat-card-content>
 
-        <img mat-card-image *ngIf="post.imageUrl" src="{{ post.imageUrl }}" alt="Post Image">
+        <img mat-card-image *ngIf="post.imageUrl" src="{{ post.imageUrl }}" alt="Post Image"
+            [ngStyle]="{'margin': '0'}"
+        >
+        
         <div *ngFor="let comment of post.comments" class="comment-container">
             <mat-divider></mat-divider>
             <app-comment [comment]="comment"></app-comment>
         </div>
 
         <mat-card-actions align="end">
-            <app-post-delete-button [post]="post" *ngIf="post.author.id==currentUser.id"></app-post-delete-button>
+            <app-post-delete-button [post]="post" *ngIf="post.author.id==currentUser.id" (postToRemove)="postToRemove.next($event)"></app-post-delete-button>
             <button mat-raised-button color="primary" (click)="toggleReplyToPost()">Reply</button>
         </mat-card-actions>
 

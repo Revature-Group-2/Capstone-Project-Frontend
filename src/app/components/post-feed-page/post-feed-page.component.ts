@@ -25,7 +25,7 @@ export class PostFeedPageComponent implements OnInit {
   constructor(private postService: PostService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.postService.getAllPosts().subscribe(
+    this.postService.getAllSubscribedPosts().subscribe(
       (response) => {
         this.posts = response
       }
@@ -42,18 +42,29 @@ export class PostFeedPageComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.posts = [response, ...this.posts]
+          this.profanity = false;
           this.toggleCreatePost()
         }, 
         error: error => {
           if (error.error === "profanity") {
-            console.log('hello');
             this.profanity = true;
           }
         },
         complete: () => {
           this.postForm.controls.imageUrl.setValue('')
           this.postForm.controls.text.setValue('')
+          this.profanity = false;
         }
     })
   }
+
+  toggleProfanity = () => {
+    console.log("profanity");
+    this.profanity = false;
+  }
+
+  onPostRemove(e: any) {
+    this.posts = this.posts.filter(post => post.id != e.id);
+  }
 }
+

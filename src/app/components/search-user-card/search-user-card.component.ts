@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IProfile, IUser, Profile } from 'src/app/models/Profile';
+import { SubscriptionService } from 'src/app/services/subscription.service';
 
 @Component({
   selector: 'app-search-user-card',
@@ -8,20 +9,37 @@ import { IProfile, IUser, Profile } from 'src/app/models/Profile';
 })
 export class SearchUserCardComponent implements OnInit {
 
+  isSubscribed: boolean = false
+
   @Input()
-  profile: IProfile = new Profile();
+  profile: Profile = new Profile();
 
-  user: IUser = {
-    id: 0,
-    email: 'vova96.1996@gmail.com',
-    firstName: 'Volodymyr',
-    lastName: 'Melnychenko',
-    avatarImageUrl: 'https://www.nicepng.com/png/full/128-1280406_view-user-icon-png-user-circle-icon-png.png'
-  }
+  @Input()
+  subscribedIds: number[];
 
-  constructor() { }
+  @Input()
+  ownId: number;
+
+  constructor(private subscriptionService: SubscriptionService) { }
 
   ngOnInit(): void {
+    this.isSubscribed = this.subscribedIds.includes(this.profile.id)
+  }
+
+  onSubscribe() {
+    this.subscriptionService.subscribeProfile(this.profile.id).subscribe( {
+      next: (response) => {
+        this.isSubscribed = true;
+      }
+    })
+  }
+
+  onUnsubscribe() {
+    this.subscriptionService.unsubscribeProfile(this.profile.id).subscribe( {
+      next: (response) => {
+        this.isSubscribed = false;
+      }
+    })
   }
 
 }

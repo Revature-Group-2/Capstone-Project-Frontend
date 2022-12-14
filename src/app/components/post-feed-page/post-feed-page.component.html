@@ -27,7 +27,7 @@
                     <mat-label>Add an Image?</mat-label>
                     <input matInput formControlName="imageUrl">
                 </mat-form-field>
-                <div *ngIf="this.profanity">
+                <div *ngIf="this.profanity" (click)="toggleProfanity()" class="text-red-600">
                     No profanity!
                 </div>
 
@@ -40,7 +40,7 @@
         </ng-template>
 
         <div class="" *ngFor="let post of posts">
-            <app-post [post]="post"></app-post>
+            <app-post [post]="post" (postToRemove)="onPostRemove($event)"></app-post>
         </div>
     </div>
 </div>

@@ -15,7 +15,7 @@
         *ngIf="profilePersonalInfo.jobTitle"
     >
         <mat-icon class="scale-75">work</mat-icon> 
-        <span>{{ profilePersonalInfo.jobTitle }} {{ profilePersonalInfo.companyUrl && 'at' }} 
+        <span>{{ profilePersonalInfo.jobTitle }} {{ profilePersonalInfo.companyName && 'at' }} 
             <a 
                 class="text-blue-600 underline" 
                 [href]="profilePersonalInfo.companyUrl" 

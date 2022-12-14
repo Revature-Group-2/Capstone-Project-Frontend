@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SearchUserSidebarComponent } from './search-user-sidebar.component';
 
@@ -8,7 +11,8 @@ describe('SearchUserSidebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchUserSidebarComponent ]
+      imports: [ MatIconModule, MatExpansionModule, BrowserAnimationsModule],
+      declarations: [ SearchUserSidebarComponent]
     })
     .compileComponents();
 
